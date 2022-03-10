@@ -14,7 +14,7 @@ class ScreenManager extends StatefulWidget {
 class _ScreenManagerState extends State<ScreenManager> {
   late int _selectedIndex = 0;
   String _title = "";
-  Icon _icon = Icon(Icons.cancel);
+  Icon _icon = const Icon(Icons.cancel);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -32,18 +32,18 @@ class _ScreenManagerState extends State<ScreenManager> {
   Widget _getPage(int index){
     switch (index) {
       case 0:
-        _setTitleInfo("Workout Tracker", Icon(Icons.fitness_center));
+        _setTitleInfo("Workout Tracker", const Icon(Icons.fitness_center));
         return const WorkoutTracker();
          // return the daily page as a widget
       case 1:
-        _setTitleInfo("Daily", Icon(Icons.calendar_today));
+        _setTitleInfo("Daily", const Icon(Icons.calendar_today));
         return const Daily();// return the profile page as a widget
       case 2:
-        _setTitleInfo("Profile", Icon(Icons.person));
+        _setTitleInfo("My Profile", const Icon(Icons.person));
         return const Profile(); // return the workout tracker page as a widget
     }
 
-    _setTitleInfo("Page Not Found", Icon(Icons.cancel));
+    _setTitleInfo("Page Not Found", const Icon(Icons.cancel));
     return const Center(child: Text("There is no page builder for this index."),);
   }
 
@@ -54,18 +54,15 @@ class _ScreenManagerState extends State<ScreenManager> {
             body: _getPage(_selectedIndex),
             appBar: AppBar(
               backgroundColor: const Color(0xFF2B120D),
-              // centerTitle: true,
               elevation: 0,
-              // leading: const Icon(Icons.person),
-              // title: Text(_title),
               title:Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _icon,
-                    SizedBox(width: 5.0),
-                    Container(
-                      child: Text(_title),
+                    const SizedBox(width: 5.0),
+                    Text(_title,
+                      style: const TextStyle(color: Color(0xFFFCF4E1)),
                     )
 
                   ],
