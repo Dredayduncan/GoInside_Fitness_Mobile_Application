@@ -133,7 +133,6 @@ class Login extends StatelessWidget {
                     color: Color(0xFFFCF4E1),
                     textColor: Color(0xFF2B120D)
                 ),
-                SizedBox(height: 5.0),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -144,7 +143,8 @@ class Login extends StatelessWidget {
                   child: Text(
                     "Don't have an account yet? Sign Up",
                     style: TextStyle(
-                        color: Colors.blue
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold
                     )
                   ),
                 )

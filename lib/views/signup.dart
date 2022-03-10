@@ -145,7 +145,8 @@ class SignUp extends StatelessWidget {
                   child: Text(
                       'Already have an account? Log In',
                       style: TextStyle(
-                          color: Colors.blue
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold
                       )
                   ),
                 )
