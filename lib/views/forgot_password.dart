@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../common_widgets/customElevatedButton.dart';
+
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
 
@@ -7,7 +9,12 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.grey[900],
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        //backgroundColor: Colors.grey[900],
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -69,24 +76,17 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40.0),
-                Container(
-                    width: 250.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        color: Colors.yellow[100],
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Send Code',
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.brown,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    )
-                )
+                CustomElevatedButton(
+                    text: 'Send Code',
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(
+                          builder: (context) => ForgotPassword())
+                      );
+                    },
+                    color: Color(0xFFFCF4E1),
+                    textColor: Color(0xFF2B120D)
+                ),
               ],
             ),
           ),
