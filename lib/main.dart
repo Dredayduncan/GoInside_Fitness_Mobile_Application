@@ -5,5 +5,4 @@ import 'package:go_inside_fitness/views/welcome_screen.dart';
 //import 'package:go_inside_fitness/views/screenManager.dart';
 //import 'package:go_inside_fitness/views/signup.dart';
 
-void main() => runApp(const WelcomeScreen());
-
+void main() => runApp(MaterialApp(home: WelcomeScreen()));

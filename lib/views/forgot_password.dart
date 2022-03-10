@@ -7,8 +7,7 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -53,7 +52,7 @@ class ForgotPassword extends StatelessWidget {
                 ),
                 SizedBox(height: 10.0),
                 Container(
-                  width: 250.0,
+                  width: 300.0,
                   decoration: BoxDecoration(
                       color: Colors.grey[500]?.withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(50.0))
@@ -91,7 +90,6 @@ class ForgotPassword extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_inside_fitness/views/forgot_password.dart';
 import 'package:go_inside_fitness/views/signup.dart';
 
 import '../common_widgets/customElevatedButton.dart';
@@ -8,10 +9,12 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.white, //change your color here
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -54,7 +57,7 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: 10.0),
                 Container(
-                  width: 250.0,
+                  width: 300.0,
                   decoration: BoxDecoration(
                       color: Colors.grey[500]?.withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(50.0))
@@ -78,7 +81,7 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: 15.0),
                 Container(
-                  width: 250.0,
+                  width: 300.0,
                   decoration: BoxDecoration(
                       color: Colors.grey[500]?.withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(50.0))
@@ -100,19 +103,25 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 5.0),
                 Container(
                   width: 250.0,
-                  child: Text(
-                    'Forgot Password?',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(
+                          builder: (context) => ForgotPassword())
+                      );
+                    },
+                    child: Text(
+                        "Forgot Password?",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Colors.white
+                        )
                     ),
-                  ),
+                  )
                 ),
-                SizedBox(height: 40.0),
+                SizedBox(height: 10.0),
                 CustomElevatedButton(
                     text: 'Log In',
                     onPressed: () {
@@ -143,7 +152,6 @@ class Login extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
