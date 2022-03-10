@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_inside_fitness/common_widgets/customElevatedButton.dart';
+import 'package:go_inside_fitness/views/signup.dart';
+
+import 'login.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -11,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/fitness.png"),
+                image: AssetImage("images/fitness.png"),
                 fit: BoxFit.cover),
           ),
           padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -37,23 +41,16 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15.0),
-                Container(
-                    width: 250.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        color: Colors.yellow[100],
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.brown,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    )
+                CustomElevatedButton(
+                    text: 'Sign In',
+                    onPressed: () {
+                      Navigator.push(
+                        context, MaterialPageRoute(
+                        builder: (context) => Login())
+                      );
+                    },
+                    color: Color(0xFFFCF4E1),
+                    textColor: Color(0xFF2B120D)
                 ),
                 SizedBox(height: 15.0),
                 Text(
@@ -64,23 +61,16 @@ class WelcomeScreen extends StatelessWidget {
                   )
                 ),
                 SizedBox(height: 15.0),
-                Container(
-                    width: 250.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        color: Colors.yellow[100],
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Create a New Account',
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.brown,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    )
+                CustomElevatedButton(
+                    text: 'Create a New Account',
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(
+                          builder: (context) => SignUp())
+                      );
+                    },
+                    color: Color(0xFFFCF4E1),
+                    textColor: Color(0xFF2B120D)
                 ),
               ],
             ),
