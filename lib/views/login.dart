@@ -143,7 +143,7 @@ class Login extends StatelessWidget {
                   child: Text(
                     "Don't have an account yet? Sign Up",
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Color(0xFFFCF4E1),
                       fontWeight: FontWeight.bold
                     )
                   ),
