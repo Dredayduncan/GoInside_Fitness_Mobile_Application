@@ -31,13 +31,13 @@ class _ProfileState extends State<Profile> {
                       children: [
                         const CircleAvatar(
                           backgroundImage: AssetImage("images/profile.jpeg"),
-                          minRadius: 60.0,
+                          minRadius: 50.0,
                         ),
                         Positioned(
                           bottom: 5,
                           right: 0,
                           child: Container(
-                            height: 37.0,
+                            height: 35.0,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xFFFCF4E1),
@@ -135,6 +135,9 @@ class _ProfileState extends State<Profile> {
               ),
             ],
           ),
+
+          const SizedBox(height: 10.0,),
+
           Container(
             height: 60,
             width: 360,
@@ -142,34 +145,59 @@ class _ProfileState extends State<Profile> {
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             color: Color(0xFF5A5A5A)
             ),
-            child: Column(
-              children: const [
-                Text(
-                  "GO INSIDE PACKAGE",
-                  style: TextStyle(
-                    color: Colors.white
+            child: Padding(
+              padding: const EdgeInsets.only(left: 25.0, top: 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    "GO INSIDE PACKAGE",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w300
+                    ),
                   ),
-                ),
-                Text(
-                  "LITE",
-                  style: TextStyle(
-                    color: Color(0xFFFCF4E1)
-                  ),
-                )
-              ],
+                  Text(
+                    "LITE",
+                    style: TextStyle(
+                      color: Color(0xFFFCF4E1),
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  )
+                ],
+              ),
             )
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomElevatedButton(
-              text: "Save Profile",
-              onPressed: () {},
-              color: const Color(0xFFFCF4E1),
-              textColor: const Color(0xFF2B120D),
-            ),
-          )
+
+          const SizedBox(height: 10.0,),
+          CustomElevatedButton(
+            text: "Save Profile",
+            onPressed: () {},
+            color: const Color(0xFFFCF4E1),
+            textColor: const Color(0xFF2B120D),
+          ),
         ],
       ),
+      // bottomSheet: CustomElevatedButton(
+      //   text: "Save Profile",
+      //   onPressed: () {},
+      //   color: const Color(0xFFFCF4E1),
+      //   textColor: const Color(0xFF2B120D),
+      // ),
+      // bottomSheet: BottomSheet(
+      //   onClosing: () {},
+      //   backgroundColor: const Color(0xFF2B120D),
+      //   builder: (BuildContext context){
+      //     return CustomElevatedButton(
+      //           text: "Save Profile",
+      //           onPressed: () {},
+      //           color: const Color(0xFFFCF4E1),
+      //           textColor: const Color(0xFF2B120D),
+      //         );
+      //   }
+      // ),
     );
   }
 }
