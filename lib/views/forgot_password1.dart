@@ -68,7 +68,7 @@ class ForgotPassword1 extends StatelessWidget {
                       hintText: 'Enter Code',
                       icon: Icon(Icons.email, color: Colors.white),
                       hintStyle: TextStyle(
-                        color: Colors.white,
+                        color: Colors.grey[400],
                       ),
                     ),
                   ),

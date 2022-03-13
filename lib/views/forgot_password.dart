@@ -68,7 +68,7 @@ class ForgotPassword extends StatelessWidget {
                         hintText: 'Enter Email',
                         icon: Icon(Icons.email, color: Colors.white),
                         hintStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.grey[400],
                         ),
                       ),
                     ),
@@ -78,7 +78,7 @@ class ForgotPassword extends StatelessWidget {
                 CustomElevatedButton(
                     text: 'Send Code',
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context, MaterialPageRoute(
                           builder: (context) => ForgotPassword1())
                       );

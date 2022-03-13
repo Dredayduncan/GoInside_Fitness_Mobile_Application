@@ -72,7 +72,7 @@ class Login extends StatelessWidget {
                         hintText: 'Enter Email',
                         icon: Icon(Icons.email, color: Colors.white),
                         hintStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.grey[400],
                         ),
                       ),
                     ),
@@ -96,7 +96,7 @@ class Login extends StatelessWidget {
                         hintText: 'Enter Password',
                         icon: Icon(Icons.key, color: Colors.white),
                         hintStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.grey[400],
                         ),
                       ),
                     ),
