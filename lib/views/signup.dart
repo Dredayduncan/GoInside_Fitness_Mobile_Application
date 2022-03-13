@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../common_widgets/customElevatedButton.dart';
-import 'login.dart';
+import 'package:go_inside_fitness/views/login.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);

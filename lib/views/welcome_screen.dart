@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/customElevatedButton.dart';
 import 'package:go_inside_fitness/views/signup.dart';
-
-import 'login.dart';
+import 'package:go_inside_fitness/views/login.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

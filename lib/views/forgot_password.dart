@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../common_widgets/customElevatedButton.dart';
+import 'forgot_password1.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -80,7 +80,7 @@ class ForgotPassword extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                           context, MaterialPageRoute(
-                          builder: (context) => ForgotPassword())
+                          builder: (context) => ForgotPassword1())
                       );
                     },
                     color: Color(0xFFFCF4E1),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/views/forgot_password.dart';
 import 'package:go_inside_fitness/views/signup.dart';
-
 import '../common_widgets/customElevatedButton.dart';
 
 class Login extends StatelessWidget {
