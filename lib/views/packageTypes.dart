@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class PackagesTypes extends StatelessWidget {
   const PackagesTypes({Key? key}) : super(key: key);
 
@@ -8,18 +9,22 @@ class PackagesTypes extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
+            elevation: 0.0,
             backgroundColor: const Color(0xFF2B120D),
             title: Center(child: Text('Go Inside Fitness')),
           ),
 
           body: Container(
+
+            height: 450,
+            width: 350,
             padding: EdgeInsets.all(30.0),
             child: GridView.count(
               crossAxisCount: 1,
               children: <Widget>[
                 //Text("The packages we offer"),
                 Card(
-                  shape: RoundedRectangleBorder(),
+                  //shape: RoundedRectangleBorder(),
                   child: InkWell(
                     onTap: (){},
                     splashColor: Colors.amber,
