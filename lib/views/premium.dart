@@ -7,8 +7,7 @@ class Premium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xFF2B120D),
           elevation: 0,
@@ -94,7 +93,7 @@ class Premium extends StatelessWidget {
 
         backgroundColor: const Color(0xFF2B120D),
 
-      ),
-    );
+      );
+
   }
 }

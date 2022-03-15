@@ -6,8 +6,7 @@ class Lite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xFFFCF4E1),
           elevation: 0,
@@ -91,7 +90,6 @@ class Lite extends StatelessWidget {
         ),
 
         backgroundColor: const Color(0xFFFCF4E1),
-      ),
     );
   }
 }
