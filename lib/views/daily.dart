@@ -13,7 +13,7 @@ class Daily extends StatefulWidget {
 class _DailyState extends State<Daily> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,7 @@ class _DailyState extends State<Daily> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Workouts()),
+                MaterialPageRoute(builder: (context) => Workouts(theDate: _selectedDay,)),
               );
             },
             color: const Color(0xFFFCF4E1),

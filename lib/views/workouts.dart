@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:go_inside_fitness/widget_generators/workouts_and_tutorials.dart';
 
 class Workouts extends StatelessWidget {
-  final tabViewer = WorkoutsAndTutorials(date: DateTime.now());
+  final DateTime theDate;
+  late WorkoutsAndTutorials tabViewer;
 
-  Workouts({Key? key}) : super(key: key);
+  Workouts({Key? key, required this.theDate}) : super(key: key){
+    tabViewer = WorkoutsAndTutorials(theDate: theDate);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class Workouts extends StatelessWidget {
               ),
             ],
           ),
-          title: const Text("28/02/2022"),
+          title: Text(DateFormat("dd/MM/yyyy").format(theDate)),
         ),
         body: TabBarView(
           children: [

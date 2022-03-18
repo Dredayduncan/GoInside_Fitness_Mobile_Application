@@ -1,60 +1,52 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoItems extends StatefulWidget {
-  final VideoPlayerController videoPlayerController;
-  final bool looping;
-  final bool autoplay;
+class VideoItem extends StatelessWidget {
+  final String link;
+  final String workoutName;
 
-
-  VideoItems({
-    required this.videoPlayerController,
-    required this.looping, required this.autoplay,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _VideoItemsState createState() => _VideoItemsState();
-}
-
-class _VideoItemsState extends State<VideoItems> {
-  late ChewieController _chewieController;
-
-  @override
-  void initState() {
-    super.initState();
-    _chewieController = ChewieController(
-      videoPlayerController: widget.videoPlayerController,
-      aspectRatio:5/8,
-      autoInitialize: true,
-      autoPlay: widget.autoplay,
-      looping: widget.looping,
-      errorBuilder: (context, errorMessage) {
-        return Center(
-          child: Text(
-            errorMessage,
-            style: const TextStyle(color: Colors.white),
-          ),
-        );
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _chewieController.dispose();
-  }
+  const VideoItem({Key? key, required this.link, required this.workoutName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Chewie(
-        controller: _chewieController,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        YoutubePlayerBuilder(
+          player: YoutubePlayer(
+            controller: YoutubePlayerController(
+              initialVideoId: YoutubePlayer.convertUrlToId(link)!,
+              flags: const YoutubePlayerFlags(
+                  hideControls: false,
+                  controlsVisibleAtStart: true,
+                  autoPlay: false,
+                  mute: false
+              ),
+            ),
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: const Color(0xFFFCF4E1),
+          ),
+          builder: (context, player) {
+            return Column(
+              children: [
+                player
+              ],
+            );
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            workoutName,
+            style: const TextStyle(
+                color: Color(0xFFFCF4E1),
+                fontFamily: "Montserrat",
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        )
+      ],
     );
   }
-
 }
