@@ -11,11 +11,11 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  late String _name;
+  late String _name, _email;
 
   final emailController = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmpassword = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _confirmpassword = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
 
@@ -123,8 +123,8 @@ class _SignUpState extends State<SignUp> {
                         validator: (email) => email != null && !EmailValidator.validate(email)
                           ? 'Enter a valid email'
                           : null,
-                        onSaved: (name){
-                          _name = name!;
+                        onSaved: (email){
+                          _email = email!;
                         },
                       ),
                     ),
@@ -141,7 +141,7 @@ class _SignUpState extends State<SignUp> {
                       child: TextFormField(
                         obscureText: true,
                         style: TextStyle(color: Colors.white),
-                        //controller: nameController,
+                        controller: _password,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Password',
@@ -150,6 +150,10 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.grey[400],
                           ),
                         ),
+                        validator: (value){
+                          if(value!.isEmpty){return "Please enter password";}
+                          return null;
+                        },
                       ),
                     ),
                   ),
@@ -165,7 +169,7 @@ class _SignUpState extends State<SignUp> {
                       child: TextFormField(
                         obscureText: true,
                         style: TextStyle(color: Colors.white),
-                        //controller: nameController,
+                        controller: _confirmpassword,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Confirm Password',
@@ -174,6 +178,11 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.grey[400],
                           ),
                         ),
+                        validator: (value){
+                          if(value!.isEmpty){return "Please confirm password";}
+                          if(_password.text != _confirmpassword.text){return "Passwords do not match";}
+                          return null;
+                        },
                       ),
                     ),
                   ),
