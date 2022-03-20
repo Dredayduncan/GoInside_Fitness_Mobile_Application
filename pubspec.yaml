@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   table_calendar: ^3.0.4
+  email_validator: ^2.0.1
   flutter:
     sdk: flutter
 
