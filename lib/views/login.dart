@@ -14,7 +14,6 @@ class _LoginState extends State<Login> {
 
   final emailController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +85,10 @@ class _LoginState extends State<Login> {
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                         ),
                         validator: (email) => email != null && !EmailValidator.validate(email)
                             ? 'Enter a valid email'
@@ -113,6 +116,10 @@ class _LoginState extends State<Login> {
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                         ),
                         validator: (value){
                           if(value!.isEmpty){return "Please enter password";}

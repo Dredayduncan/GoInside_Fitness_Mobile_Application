@@ -86,6 +86,10 @@ class _SignUpState extends State<SignUp> {
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                         ),
                         validator: (value){
                           if(value!.isEmpty){return "Please enter name";}
@@ -119,6 +123,10 @@ class _SignUpState extends State<SignUp> {
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                         ),
                         validator: (email) => email != null && !EmailValidator.validate(email)
                           ? 'Enter a valid email'
@@ -149,6 +157,10 @@ class _SignUpState extends State<SignUp> {
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                         ),
                         validator: (value){
                           if(value!.isEmpty){return "Please enter password";}
@@ -177,6 +189,10 @@ class _SignUpState extends State<SignUp> {
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                         ),
                         validator: (value){
                           if(value!.isEmpty){return "Please confirm password";}
