@@ -26,6 +26,7 @@ class TypesOfPackages extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 29.0,
                     color: Color(0xFFFCF4E1),
+                    fontFamily: "OpenSans"
                   ),
                 )
               ),
@@ -35,6 +36,7 @@ class TypesOfPackages extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 29.0,
                     color: Colors.white,
+                      fontFamily: "OpenSans"
                   ),
                 ),
               ),
@@ -55,10 +57,13 @@ class TypesOfPackages extends StatelessWidget {
 
               Center(
                 child: Container(
-                  height: 120,
-                  width: 300,
+                  height: 133,
+                  width: 271,
                   child:
                   Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     color: Color(0xFFFCF4E1),
                     //shape: RoundedRectangleBorder(),
                     child: InkWell(
@@ -139,11 +144,15 @@ class TypesOfPackages extends StatelessWidget {
 
               Center(
                 child: Container(
-                  height: 120,
-                  width: 300,
+
+                  height: 133,
+                  width: 271,
                   child:
                   Card(
-                    color: Colors.grey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    color: Color(0xFF5A5A5A),
                     //shape: RoundedRectangleBorder(),
                     child: InkWell(
                       onTap: (){

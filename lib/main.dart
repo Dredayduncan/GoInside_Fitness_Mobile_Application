@@ -5,7 +5,10 @@ import 'package:go_inside_fitness/views/TypesOfPackages.dart';
 import 'package:go_inside_fitness/views/premium.dart';
 
 void main() {
-  runApp(MaterialApp(home: const TypesOfPackages()));
+  runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+      home: const TypesOfPackages()));
 
 }
 
