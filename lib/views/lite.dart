@@ -55,19 +55,19 @@ class Lite extends StatelessWidget {
                 child: ListView(
                   padding: const EdgeInsets.all(8),
                     children: <Widget>[
-                      ListTile( title: Text("Fitness routine & instructive videos", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11, ),
+                      ListTile( title: Text("Fitness routine & instructive videos", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6, ),
                       textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D), ),
 
-                      ListTile( title: Text("Curated Informative YouTube playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Consultation (Scheduled meetings)", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
 
-                      ListTile( title: Text("Workout song playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Curated Informative YouTube playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
 
-                      ListTile( title: Text("Sample meal plans", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Calorie guidance & nutrition tips", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
 
-                      ListTile( title: Text("Calorie guidance & nutrition tips", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Booked live sessions", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
                     ]
 

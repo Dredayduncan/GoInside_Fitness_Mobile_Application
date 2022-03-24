@@ -56,20 +56,24 @@ class Premium extends StatelessWidget {
                 child: ListView(
                     padding: const EdgeInsets.all(8),
                     children: <Widget>[
-                      ListTile( title: Text("Fitness routine & instructive videos", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11, ),
+                      ListTile( title: Text("Fitness routine & instructive videos", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6, ),
                           textColor: Color(0xFFFCF4E1), iconColor: Color(0xFFFCF4E1)),
 
-                      ListTile( title: Text("Curated Informative YouTube playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Curated Informative YouTube playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFFFCF4E1), iconColor: Color(0xFFFCF4E1)),
 
-                      ListTile( title: Text("Workout song playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Workout song playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFFFCF4E1), iconColor: Color(0xFFFCF4E1)),
 
-                      ListTile( title: Text("Sample meal plans", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Sample meal plans", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFFFCF4E1), iconColor: Color(0xFFFCF4E1)),
 
-                      ListTile( title: Text("Calorie guidance & nutrition tips", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
+                      ListTile( title: Text("Calorie guidance & nutrition tips", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
                           textColor: Color(0xFFFCF4E1), iconColor: Color(0xFFFCF4E1)),
+
+                      ListTile( title: Text("Accountability group", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
+                          textColor: Color(0xFFFCF4E1), iconColor: Color(0xFFFCF4E1)),
+
                     ]
 
 
