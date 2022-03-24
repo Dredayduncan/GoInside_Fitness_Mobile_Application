@@ -14,7 +14,7 @@ class Lite extends StatelessWidget {
 
 
         body: Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -24,6 +24,7 @@ class Lite extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 29.0,
                       color: Color(0xFF2B120D),
+                        fontFamily: "OpenSans"
                     ),
                   )
               ),
@@ -33,6 +34,7 @@ class Lite extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 29.0,
                     color: Colors.white,
+                      fontFamily: "OpenSans"
                   ),
                 ),
               ),
@@ -42,6 +44,7 @@ class Lite extends StatelessWidget {
                   style: TextStyle(letterSpacing: 1.0,
                     fontSize: 15.0,
                     color: Color(0xFF2B120D),
+                      fontFamily: "Montserrat"
                   ),
                 ),
               ),
@@ -52,19 +55,19 @@ class Lite extends StatelessWidget {
                 child: ListView(
                   padding: const EdgeInsets.all(8),
                     children: <Widget>[
-                      ListTile( title: Text("Fitness routine & instructive videos"), leading: Icon(Icons.brightness_1, size: 17, ),
-                      textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
+                      ListTile( title: Text("Fitness routine & instructive videos", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11, ),
+                      textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D), ),
 
-                      ListTile( title: Text("Curated Informative YouTube playlists"), leading: Icon(Icons.brightness_1, size: 17,  ),
+                      ListTile( title: Text("Curated Informative YouTube playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
 
-                      ListTile( title: Text("Workout song playlists"), leading: Icon(Icons.brightness_1, size: 17,  ),
+                      ListTile( title: Text("Workout song playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
 
-                      ListTile( title: Text("Sample meal plans"), leading: Icon(Icons.brightness_1, size: 17,  ),
+                      ListTile( title: Text("Sample meal plans", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
 
-                      ListTile( title: Text("Calorie guidance & nutrition tips"), leading: Icon(Icons.brightness_1, size: 17,  ),
+                      ListTile( title: Text("Calorie guidance & nutrition tips", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 11,  ),
                           textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
                     ]
 

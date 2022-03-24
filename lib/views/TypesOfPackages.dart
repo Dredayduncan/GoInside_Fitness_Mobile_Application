@@ -16,7 +16,7 @@ class TypesOfPackages extends StatelessWidget {
         ),
 
         body: Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,15 +40,19 @@ class TypesOfPackages extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              //SizedBox(height: 20.0),
 
-              Center(
-                child: Text("The Packages We Offer",
-                  style: TextStyle(
-                    letterSpacing: 1.0,
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
-                    color: Color(0xFFFCF4E1),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                child: Center(
+                  child: Text("The Packages We Offer",
+                    style: TextStyle(
+                      letterSpacing: 1.0,
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 15.0,
+                      color: Color(0xFFFCF4E1),
+                        fontFamily: "Montserrat"
+                    ),
                   ),
                 ),
               ),
@@ -73,7 +77,7 @@ class TypesOfPackages extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => const Lite()),
                         );
                       },
-                      splashColor: Colors.amber,
+                      splashColor: Colors.white70,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
@@ -83,13 +87,14 @@ class TypesOfPackages extends StatelessWidget {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.fromLTRB(15,8,0,8),
                               child: Text("Lite",
                                   style: TextStyle(
-                                    letterSpacing: 1.0,
+                                    //letterSpacing: 1.0,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25.0,
                                     color: Colors.grey[500],
+                                      fontFamily: "Montserrat"
                                   ),
 
                               ),
@@ -105,6 +110,7 @@ class TypesOfPackages extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 25.0,
                             color: Color(0xFF2B120D),
+                                fontFamily: "Montserrat"
                           ),
                           ),
 
@@ -115,8 +121,9 @@ class TypesOfPackages extends StatelessWidget {
                           Align(
                               alignment: Alignment.bottomRight,
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Preview"),
+                                padding: const EdgeInsets.fromLTRB(0,12,8,0),
+                                child: Text("Preview", style: TextStyle(fontFamily: "Montserrat"
+                                ),),
                               )
                           ),
 
@@ -127,20 +134,25 @@ class TypesOfPackages extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 20.0),
+             // SizedBox(height: 20.0),
 
-              Center(
-                child: Text("Or",
-                  style: TextStyle(
-                    letterSpacing: 1.0,
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
-                    color: Color(0xFFFCF4E1),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                child: Center(
+                  child: Text("Or",
+                    style: TextStyle(
+                      letterSpacing: 1.0,
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 15.0,
+                      color: Color(0xFFFCF4E1),
+                        fontFamily: "Montserrat"
+
+                    ),
                   ),
                 ),
               ),
 
-              SizedBox(height: 20.0),
+              //SizedBox(height: 20.0),
 
               Center(
                 child: Container(
@@ -161,7 +173,7 @@ class TypesOfPackages extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => const Premium()),
                         );
                       },
-                      splashColor: Colors.amber,
+                      splashColor: Colors.grey,
 
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -170,13 +182,14 @@ class TypesOfPackages extends StatelessWidget {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.fromLTRB(15,8,0,8),
                               child: Text("Premium",
                                 style: TextStyle(
-                                  letterSpacing: 1.0,
+                                  //letterSpacing: 1.0,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25.0,
                                   color: Colors.white,
+                                    fontFamily: "Montserrat"
                                 ),
                               ),
                             ),
@@ -189,16 +202,17 @@ class TypesOfPackages extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: 25.0,
                               color: Color(0xFF2B120D),
+                                fontFamily: "Montserrat"
                             ),
 
                           ),
 
 
                           Align(
-                            alignment: Alignment.topRight,
+                            alignment: Alignment.bottomRight,
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Preview"),
+                                padding: const EdgeInsets.fromLTRB(0,12,8,0),
+                                child: Text("Preview", style: TextStyle(fontFamily: "Montserrat"),),
                               )),
                         ],
                       ),
@@ -207,19 +221,23 @@ class TypesOfPackages extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 50.0),
+             // SizedBox(height: 50.0),
               
-              Center(
-                child: Text("We offer these two packages to "
-                    "our clients to allow them to determine "
-                    "which schedule best fits them.",
-                style: TextStyle(
-                  letterSpacing: 1.0,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 11.0,
-                  color: Color(0xFFFCF4E1),
-                ),
-                  textAlign: TextAlign.center,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0,40,0,0),
+                child: Center(
+                  child: Text("We offer these two packages to "
+                      "our clients to allow them to determine "
+                      "which schedule best fits them.",
+                  style: TextStyle(
+                    letterSpacing: 1.0,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 11.0,
+                    color: Color(0xFFFCF4E1),
+                      fontFamily: "Montserrat"
+                  ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               )
 
