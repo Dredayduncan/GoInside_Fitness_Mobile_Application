@@ -1,10 +1,13 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:go_inside_fitness/views/login.dart';
 import '../common_widgets/customElevatedButton.dart';
-import 'forgot_password1.dart';
+//import 'forgot_password1.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+
+  TextEditingController email = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +66,7 @@ class ForgotPassword extends StatelessWidget {
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       autofillHints: [AutofillHints.email],
-                      //obscureText: true,
-                      //controller: nameController,
+                      controller: email,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           border: InputBorder.none,
@@ -87,11 +89,10 @@ class ForgotPassword extends StatelessWidget {
                 SizedBox(height: 40.0),
                 CustomElevatedButton(
                     text: 'Send Code',
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context, MaterialPageRoute(
-                          builder: (context) => ForgotPassword1())
-                      );
+                    onPressed: () async{
+                      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text).then((value) {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
+                      });
                     },
                     color: Color(0xFFFCF4E1),
                     textColor: Color(0xFF2B120D)
