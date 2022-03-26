@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/views/forgot_password.dart';
 import 'package:go_inside_fitness/views/signup.dart';
+import 'package:go_inside_fitness/views/welcome_screen.dart';
 import '../common_widgets/customElevatedButton.dart';
 
 class Login extends StatefulWidget {
@@ -79,7 +80,6 @@ class _LoginState extends State<Login> {
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autofillHints: [AutofillHints.email],
-                        //obscureText: true,
                         controller: emailController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -161,7 +161,7 @@ class _LoginState extends State<Login> {
                           then((value) {
                             Navigator.push(
                                 context, MaterialPageRoute(
-                                builder: (context) => SignUp())
+                                builder: (context) => WelcomeScreen())
                             );
                           });
                         }

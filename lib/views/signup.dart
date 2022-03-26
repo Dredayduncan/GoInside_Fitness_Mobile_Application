@@ -77,8 +77,6 @@ class _SignUpState extends State<SignUp> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: TextFormField(
-                        //obscureText: true,
-                        //controller: nameController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -114,7 +112,6 @@ class _SignUpState extends State<SignUp> {
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         autofillHints: [AutofillHints.email],
-                        //obscureText: true,
                         controller: emailController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -148,8 +145,6 @@ class _SignUpState extends State<SignUp> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: TextFormField(
-                        //obscureText: true,
-                        //controller: nameController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                             border: InputBorder.none,
