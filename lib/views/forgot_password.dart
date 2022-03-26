@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import '../common_widgets/customElevatedButton.dart';
 import 'forgot_password1.dart';
@@ -59,18 +60,27 @@ class ForgotPassword extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
-                    child: TextField(
+                    child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      autofillHints: [AutofillHints.email],
                       //obscureText: true,
                       //controller: nameController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Enter Email',
-                        icon: Icon(Icons.email, color: Colors.white),
-                        hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                        ),
+                          border: InputBorder.none,
+                          hintText: 'Enter Email',
+                          icon: Icon(Icons.email, color: Colors.white),
+                          hintStyle: TextStyle(
+                            color: Colors.grey[400],
+                          ),
+                          errorStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          )
                       ),
+                      validator: (email) => email != null && !EmailValidator.validate(email)
+                          ? 'Enter a valid email'
+                          : null,
                     ),
                   ),
                 ),

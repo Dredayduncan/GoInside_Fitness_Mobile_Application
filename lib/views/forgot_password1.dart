@@ -59,7 +59,7 @@ class ForgotPassword1 extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15.0),
-                  child: TextField(
+                  child: TextFormField(
                     //obscureText: true,
                     //controller: nameController,
                     style: TextStyle(color: Colors.white),
@@ -70,7 +70,15 @@ class ForgotPassword1 extends StatelessWidget {
                       hintStyle: TextStyle(
                         color: Colors.grey[400],
                       ),
+                      errorStyle: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                      )
                     ),
+                    validator: (value){
+                      if(value!.isEmpty){return "Please enter code";}
+                      return null;
+                    },
                   ),
                 ),
               ),
