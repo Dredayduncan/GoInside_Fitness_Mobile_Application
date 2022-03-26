@@ -12,7 +12,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  late String _name, _email, _phone;
+  late String _name, _phone;
 
   final emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
@@ -115,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                         keyboardType: TextInputType.emailAddress,
                         autofillHints: [AutofillHints.email],
                         //obscureText: true,
-                        //controller: nameController,
+                        controller: emailController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -132,9 +132,9 @@ class _SignUpState extends State<SignUp> {
                         validator: (email) => email != null && !EmailValidator.validate(email)
                           ? 'Enter a valid email'
                           : null,
-                        onSaved: (email){
+                        /*onSaved: (email){
                           _email = email!;
-                        },
+                        },*/
                       ),
                     ),
                   ),
@@ -242,25 +242,23 @@ class _SignUpState extends State<SignUp> {
                   CustomElevatedButton(
                       text: 'Create My Account',
                       onPressed: () {
-                        if(_formkey.currentState!.validate()) {
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text, password: _password.text).
+                        then((value){
                           Navigator.pushReplacement(
                               context, MaterialPageRoute(
                               builder: (context) => Login())
                           );
-                        }
+                        });
                       },
                       color: Color(0xFFFCF4E1),
                       textColor: Color(0xFF2B120D)
                   ),
                   TextButton(
                     onPressed: () {
-                      FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text, password: _password.text).
-                      then((value){
-                        Navigator.pushReplacement(
-                          context, MaterialPageRoute(
-                          builder: (context) => Login())
-                        );
-                      });
+                      Navigator.pushReplacement(
+                        context, MaterialPageRoute(
+                        builder: (context) => Login())
+                      );
                     },
                     child: Text(
                         'Already have an account? Log In',

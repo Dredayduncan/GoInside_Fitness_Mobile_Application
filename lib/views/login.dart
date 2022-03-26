@@ -152,23 +152,23 @@ class _LoginState extends State<Login> {
                   CustomElevatedButton(
                       text: 'Log In',
                       onPressed: () {
-                        Navigator.push(
-                            context, MaterialPageRoute(
-                            builder: (context) => Login())
-                        );
+                        FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: _password.text).
+                        then((value) {
+                          Navigator.push(
+                              context, MaterialPageRoute(
+                              builder: (context) => SignUp())
+                          );
+                        });
                       },
                       color: Color(0xFFFCF4E1),
                       textColor: Color(0xFF2B120D)
                   ),
                   TextButton(
                     onPressed: () {
-                      FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: _password.text).
-                          then((value) {
-                            Navigator.push(
-                              context, MaterialPageRoute(
-                              builder: (context) => SignUp())
-                            );
-                      });
+                      Navigator.push(
+                          context, MaterialPageRoute(
+                          builder: (context) => SignUp())
+                      );
                     },
                     child: Text(
                       "Don't have an account yet? Sign Up",
