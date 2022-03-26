@@ -242,13 +242,17 @@ class _SignUpState extends State<SignUp> {
                   CustomElevatedButton(
                       text: 'Create My Account',
                       onPressed: () {
-                        FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text, password: _password.text).
-                        then((value){
-                          Navigator.pushReplacement(
-                              context, MaterialPageRoute(
-                              builder: (context) => Login())
-                          );
-                        });
+                        if(_formkey.currentState!.validate()) {
+                          FirebaseAuth.instance.createUserWithEmailAndPassword(
+                              email: emailController.text,
+                              password: _password.text).
+                          then((value) {
+                            Navigator.pushReplacement(
+                                context, MaterialPageRoute(
+                                builder: (context) => Login())
+                            );
+                          });
+                        }
                       },
                       color: Color(0xFFFCF4E1),
                       textColor: Color(0xFF2B120D)

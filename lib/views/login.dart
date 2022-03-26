@@ -16,6 +16,8 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
 
+  final GlobalKey<FormState> _formkey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +80,7 @@ class _LoginState extends State<Login> {
                         keyboardType: TextInputType.emailAddress,
                         autofillHints: [AutofillHints.email],
                         //obscureText: true,
-                        //controller: nameController,
+                        controller: emailController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -110,7 +112,7 @@ class _LoginState extends State<Login> {
                       child: TextFormField(
                         obscureText: true,
                         style: TextStyle(color: Colors.white),
-                        //controller: nameController,
+                        controller: _password,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Password',
@@ -152,13 +154,17 @@ class _LoginState extends State<Login> {
                   CustomElevatedButton(
                       text: 'Log In',
                       onPressed: () {
-                        FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: _password.text).
-                        then((value) {
-                          Navigator.push(
-                              context, MaterialPageRoute(
-                              builder: (context) => SignUp())
-                          );
-                        });
+                        if(_formkey.currentState!.validate()) {
+                          FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: _password.text).
+                          then((value) {
+                            Navigator.push(
+                                context, MaterialPageRoute(
+                                builder: (context) => SignUp())
+                            );
+                          });
+                        }
                       },
                       color: Color(0xFFFCF4E1),
                       textColor: Color(0xFF2B120D)
