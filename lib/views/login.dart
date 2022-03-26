@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/views/forgot_password.dart';
 import 'package:go_inside_fitness/views/signup.dart';
@@ -13,6 +14,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
 
   final emailController = TextEditingController();
+  TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -160,10 +162,13 @@ class _LoginState extends State<Login> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(
-                          builder: (context) => SignUp())
-                      );
+                      FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: _password.text).
+                          then((value) {
+                            Navigator.push(
+                              context, MaterialPageRoute(
+                              builder: (context) => SignUp())
+                            );
+                      });
                     },
                     child: Text(
                       "Don't have an account yet? Sign Up",

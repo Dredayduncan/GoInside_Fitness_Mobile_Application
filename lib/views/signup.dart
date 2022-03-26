@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../common_widgets/customElevatedButton.dart';
 import 'package:go_inside_fitness/views/login.dart';
@@ -253,10 +254,13 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text, password: _password.text).
+                      then((value){
+                        Navigator.pushReplacement(
                           context, MaterialPageRoute(
                           builder: (context) => Login())
-                      );
+                        );
+                      });
                     },
                     child: Text(
                         'Already have an account? Log In',
