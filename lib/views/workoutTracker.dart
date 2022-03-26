@@ -214,7 +214,7 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
             height: 250,
             child: CircularProgressIndicator(
               color: const Color(0xFFFCF4E1),
-              backgroundColor: Color(0xFF5A5A5A),
+              backgroundColor: const Color(0xFF5A5A5A),
               value: progress,
               strokeWidth: 10,
             ),

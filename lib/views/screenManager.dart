@@ -64,10 +64,14 @@ class _ScreenManagerState extends State<ScreenManager> {
                     Text(_title,
                       style: const TextStyle(color: Color(0xFFFCF4E1)),
                     )
-
                   ],
                 ),
               ),
+              actions: _selectedIndex == 2 ? [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.logout))
+              ] : [],
             ),
             backgroundColor: const Color(0xFF2B120D),
             bottomNavigationBar: BottomNavigationBar(
