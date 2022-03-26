@@ -11,7 +11,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  late String _name, _email;
+  late String _name, _email, _phone;
 
   final emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
@@ -133,6 +133,41 @@ class _SignUpState extends State<SignUp> {
                           : null,
                         onSaved: (email){
                           _email = email!;
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15.0),
+                  Container(
+                    width: 300.0,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[500]?.withOpacity(0.5),
+                        borderRadius: BorderRadius.all(Radius.circular(50.0))
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: TextFormField(
+                        //obscureText: true,
+                        //controller: nameController,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter Phone Number',
+                            icon: Icon(Icons.phone, color: Colors.white),
+                            hintStyle: TextStyle(
+                              color: Colors.grey[400],
+                            ),
+                            errorStyle: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                        validator: (value){
+                          if(value!.isEmpty){return "Please enter phone number";}
+                          return null;
+                        },
+                        onSaved: (phone){
+                          _phone = phone!;
                         },
                       ),
                     ),
