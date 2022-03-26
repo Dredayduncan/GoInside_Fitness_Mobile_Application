@@ -30,6 +30,7 @@ dependencies:
   table_calendar: ^3.0.4
   email_validator: ^2.0.1
   firebase_auth: ^3.3.11
+  firebase_core: ^1.13.1
   flutter:
     sdk: flutter
 
