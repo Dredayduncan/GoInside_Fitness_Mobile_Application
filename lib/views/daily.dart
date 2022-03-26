@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/customElevatedButton.dart';
+import 'package:go_inside_fitness/views/workouts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Daily extends StatefulWidget {
@@ -12,7 +13,7 @@ class Daily extends StatefulWidget {
 class _DailyState extends State<Daily> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +119,12 @@ class _DailyState extends State<Daily> {
           const SizedBox(height: 2.0,),
           CustomElevatedButton(
             text: "View Today's Workouts",
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Workouts(theDate: _selectedDay,)),
+              );
+            },
             color: const Color(0xFFFCF4E1),
             textColor: const Color(0xFF2B120D),
           ),

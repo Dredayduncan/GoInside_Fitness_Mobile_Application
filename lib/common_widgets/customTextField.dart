@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: labeledText,
                 labelStyle: const TextStyle(
-                  fontWeight: FontWeight.w200,
+                  fontWeight: FontWeight.w300,
                   color: Colors.white,
                   fontSize: 15,
                 ),
