@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../common_widgets/customElevatedButton.dart';
 import 'package:go_inside_fitness/views/login.dart';
+import '../services/auth.dart';
 
 class SignUp extends StatefulWidget {
 
@@ -19,6 +20,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _confirmpassword = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
+
+  final Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -238,9 +241,10 @@ class _SignUpState extends State<SignUp> {
                       text: 'Create My Account',
                       onPressed: () {
                         if(_formkey.currentState!.validate()) {
-                          FirebaseAuth.instance.createUserWithEmailAndPassword(
-                              email: emailController.text,
-                              password: _password.text).
+                          auth.createUserWithEmailAndPassword(emailController.text, _password.text).
+                          // FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          //     email: emailController.text,
+                          //     password: _password.text).
                           then((value) {
                             Navigator.pushReplacement(
                                 context, MaterialPageRoute(
