@@ -74,7 +74,7 @@ class TypesOfPackages extends StatelessWidget {
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Lite()),
+                          MaterialPageRoute(builder: (context) => Lite()),
                         );
                       },
                       splashColor: Colors.white70,
