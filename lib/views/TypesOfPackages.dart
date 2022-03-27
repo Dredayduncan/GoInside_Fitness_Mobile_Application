@@ -212,7 +212,7 @@ class TypesOfPackages extends StatelessWidget {
                             alignment: Alignment.bottomRight,
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(0,12,8,0),
-                                child: Text("Preview", style: TextStyle(fontFamily: "Montserrat"),),
+                                child: Text("Preview", style: TextStyle(fontFamily: "Montserrat", color: Color(0xFFFCF4E1)),),
                               )),
                         ],
                       ),

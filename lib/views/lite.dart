@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_inside_fitness/common_widgets/customInfoText.dart';
 import 'package:go_inside_fitness/common_widgets/payment_buttons.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'dart:io';
@@ -14,7 +15,7 @@ class _LiteState extends State<Lite> {
 
   //pass in the public test key obtained from paystack dashboard here
   String publicKeyTest =
-      'pk_test_ieu49ej839u984urenewuwe06eishra';
+      'pk_test_3c8f00971bc23d4fa34fafe4a8cf1a629524b261';
 
   final plugin = PaystackPlugin();
 
@@ -114,26 +115,20 @@ class _LiteState extends State<Lite> {
               SizedBox(height: 10),
 
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.all(8),
-                    children: <Widget>[
-                      ListTile( title: Text("Fitness routine & instructive videos", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6, ),
-                      textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D), ),
+                child: Center(
+                  child: ListView(
+                    padding: const EdgeInsets.all(8),
+                      children: const <Widget>[
+                        CustomInfoText(text: "Fitness routine & instructive videos"),
+                        CustomInfoText(text: "Curated Informative YouTube playlists"),
+                        CustomInfoText(text: "Workout song playlists"),
+                        CustomInfoText(text: "Sample meal plans"),
+                        CustomInfoText(text: "Calorie guidance & nutrition tips"),
 
-                      ListTile( title: Text("Consultation (Scheduled meetings)", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
-                          textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
-
-                      ListTile( title: Text("Curated Informative YouTube playlists", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
-                          textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
-
-                      ListTile( title: Text("Calorie guidance & nutrition tips", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
-                          textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
-
-                      ListTile( title: Text("Booked live sessions", style: TextStyle(fontFamily: "Montserrat"),), leading: Icon(Icons.brightness_1, size: 6,  ),
-                          textColor: Color(0xFF2B120D), iconColor: Color(0xFF2B120D)),
-                    ]
+                      ]
 
 
+                  ),
                 ),
               ),
 
