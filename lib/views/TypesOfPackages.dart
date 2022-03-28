@@ -62,7 +62,7 @@ class TypesOfPackages extends StatelessWidget {
               Center(
                 child: Container(
                   height: 133,
-                  width: 271,
+                  width: 301,
                   child:
                   Card(
                     shape: RoundedRectangleBorder(
@@ -158,7 +158,7 @@ class TypesOfPackages extends StatelessWidget {
                 child: Container(
 
                   height: 133,
-                  width: 271,
+                  width: 301,
                   child:
                   Card(
                     shape: RoundedRectangleBorder(
