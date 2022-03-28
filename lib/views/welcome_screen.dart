@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/customElevatedButton.dart';
+import 'package:go_inside_fitness/services/auth.dart';
 import 'package:go_inside_fitness/views/signup.dart';
 import 'package:go_inside_fitness/views/login.dart';
 
 class WelcomeScreen extends StatelessWidget {
+
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
                 image: AssetImage("images/fitness.png"),
                 fit: BoxFit.cover),
           ),
-          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

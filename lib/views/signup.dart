@@ -35,7 +35,7 @@ class _SignUpState extends State<SignUp> {
                 image: AssetImage("images/fitness.png"),
                 fit: BoxFit.cover),
           ),
-          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
           child: Center(
             child: Form(
               key: _formkey,
@@ -51,7 +51,7 @@ class _SignUpState extends State<SignUp> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  const Text(
                     'FITNESS',
                     style: TextStyle(
                       color: Colors.white,
@@ -59,33 +59,33 @@ class _SignUpState extends State<SignUp> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5.0),
-                  Text(
+                  const SizedBox(height: 5.0),
+                  const Text(
                     'Create a new account',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Container(
                     width: 300.0,
                     decoration: BoxDecoration(
                         color: Colors.grey[500]?.withOpacity(0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
+                        borderRadius: const BorderRadius.all(Radius.circular(50.0))
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Full Name',
-                          icon: Icon(Icons.person, color: Colors.white),
+                          icon: const Icon(Icons.person, color: Colors.white),
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           )
@@ -100,12 +100,12 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   Container(
                     width: 300.0,
                     decoration: BoxDecoration(
                       color: Colors.grey[500]?.withOpacity(0.5),
-                      borderRadius: BorderRadius.all(Radius.circular(50.0))
+                      borderRadius: const BorderRadius.all(Radius.circular(50.0))
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
@@ -113,15 +113,15 @@ class _SignUpState extends State<SignUp> {
                         keyboardType: TextInputType.emailAddress,
                         autofillHints: [AutofillHints.email],
                         controller: emailController,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Email',
-                          icon: Icon(Icons.email, color: Colors.white),
+                          icon: const Icon(Icons.email, color: Colors.white),
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           )
@@ -135,25 +135,25 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   Container(
                     width: 300.0,
                     decoration: BoxDecoration(
                         color: Colors.grey[500]?.withOpacity(0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
+                        borderRadius: const BorderRadius.all(Radius.circular(50.0))
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: TextFormField(
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Enter Phone Number',
-                            icon: Icon(Icons.phone, color: Colors.white),
+                            icon: const Icon(Icons.phone, color: Colors.white),
                             hintStyle: TextStyle(
                               color: Colors.grey[400],
                             ),
-                            errorStyle: TextStyle(
+                            errorStyle: const TextStyle(
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold,
                             )
@@ -168,27 +168,27 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   Container(
                     width: 300.0,
                     decoration: BoxDecoration(
                         color: Colors.grey[500]?.withOpacity(0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
+                        borderRadius: const BorderRadius.all(Radius.circular(50.0))
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: TextFormField(
                         obscureText: true,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         controller: _password,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Password',
-                          icon: Icon(Icons.lock, color: Colors.white),
+                          icon: const Icon(Icons.lock, color: Colors.white),
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           )
@@ -200,27 +200,27 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   Container(
                     width: 300.0,
                     decoration: BoxDecoration(
                         color: Colors.grey[500]?.withOpacity(0.5),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
+                        borderRadius: const BorderRadius.all(Radius.circular(50.0))
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: TextFormField(
                         obscureText: true,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         controller: _confirmpassword,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Confirm Password',
-                          icon: Icon(Icons.lock, color: Colors.white),
+                          icon: const Icon(Icons.lock, color: Colors.white),
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           )
@@ -233,7 +233,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40.0),
+                  const SizedBox(height: 40.0),
                   CustomElevatedButton(
                       text: 'Create My Account',
                       onPressed: () {
@@ -249,8 +249,8 @@ class _SignUpState extends State<SignUp> {
                           });
                         }
                       },
-                      color: Color(0xFFFCF4E1),
-                      textColor: Color(0xFF2B120D)
+                      color: const Color(0xFFFCF4E1),
+                      textColor: const Color(0xFF2B120D)
                   ),
                   TextButton(
                     onPressed: () {
@@ -259,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                         builder: (context) => Login())
                       );
                     },
-                    child: Text(
+                    child: const Text(
                         'Already have an account? Log In',
                         style: TextStyle(
                           color: Color(0xFFFCF4E1),

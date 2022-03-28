@@ -16,15 +16,18 @@ class RTDatabase {
   }
 
   //Insert a new user into the database
-  Future<void> userSignUp({userID, fullName, contact, email, age, gender}) async {
+  Future<void> userSignUp({userID, fullName, contact, email, gender}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
 
     await ref.set({
       "fullName": fullName,
       "email": email,
-      "age": age,
       "gender": gender,
-      "contact": contact
+      "contact": contact,
+      "height": "",
+      "weight": "",
+      "goal": "",
+      "picture": ""
     });
 
   }
@@ -50,6 +53,20 @@ class RTDatabase {
     await ref.update({
       "package": package
     });
+  }
+
+  // Get user details
+  Future<void> getUser({userID}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
+
+    final snap = await ref.get();
+
+    if (snap.exists){
+      print(snap.value);
+    }
+    else{
+      print("Error");
+    }
   }
 
 }

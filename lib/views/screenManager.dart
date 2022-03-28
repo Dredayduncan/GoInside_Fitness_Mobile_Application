@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import '../services/auth.dart';
+import 'login.dart';
 import 'profile.dart';
 import 'daily.dart';
 import 'workoutTracker.dart';
 
 class ScreenManager extends StatefulWidget {
+  final Auth auth;
 
-  const ScreenManager({Key? key}) : super(key: key);
+
+  const ScreenManager({Key? key, required this.auth}) : super(key: key);
 
   @override
   State<ScreenManager> createState() => _ScreenManagerState();
@@ -40,7 +44,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         return const Daily();// return the profile page as a widget
       case 2:
         _setTitleInfo("My Profile", const Icon(Icons.person));
-        return const Profile(); // return the workout tracker page as a widget
+        return Profile(auth: widget.auth,); // return the workout tracker page as a widget
     }
 
     _setTitleInfo("Page Not Found", const Icon(Icons.cancel));
@@ -69,7 +73,13 @@ class _ScreenManagerState extends State<ScreenManager> {
               ),
               actions: _selectedIndex == 2 ? [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.auth.signOut();
+                      Navigator.pushReplacement(
+                          context, MaterialPageRoute(
+                          builder: (context) => Login())
+                      );
+                    },
                     icon: const Icon(Icons.logout))
               ] : [],
             ),
