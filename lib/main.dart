@@ -13,3 +13,4 @@ void main() async{
   Auth auth = Auth();
   runApp(MaterialApp(home: LandingPage(auth: auth,)));
 }
+
