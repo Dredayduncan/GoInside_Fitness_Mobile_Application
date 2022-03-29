@@ -101,64 +101,41 @@ class _DailyState extends State<Daily> {
           ),
           const SizedBox(height: 2.0,),
           Expanded(
-            child:  FutureBuilder(
-                future: _getMeals,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData){
-                    return snapshot.data;
-                  }
-                  else {
-                    return
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          SizedBox(
-                            child: CircularProgressIndicator(
-                              color: Color(0xFFFCF4E1),
-                            ),
-                            width: 60,
-                            height: 60,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 16),
-                            child: Text(
-                              'Awaiting result...',
-                              style: TextStyle(
-                                  color: Color(0xFFFCF4E1)
+            child: Scrollbar(
+              child: FutureBuilder(
+                  future: _getMeals,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData){
+                      return snapshot.data;
+                    }
+                    else {
+                      return
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            SizedBox(
+                              child: CircularProgressIndicator(
+                                color: Color(0xFFFCF4E1),
                               ),
+                              width: 60,
+                              height: 60,
                             ),
-                          )
-                        ],
-                      );
+                            Padding(
+                              padding: EdgeInsets.only(top: 16),
+                              child: Text(
+                                'Awaiting result...',
+                                style: TextStyle(
+                                    color: Color(0xFFFCF4E1)
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                    }
                   }
-                }
+              ),
             )
-            // ListView(
-            //   scrollDirection: Axis.vertical,
-            //   children: <Widget>[
-            //     Container(
-            //       height: 70,
-            //       color: const Color(0xFFFCF4E1),
-            //       child: const Center(child: Text('Item 1', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-            //     ),
-            //     Container(
-            //       height: 70,
-            //       color: const Color(0xFFFCF4E1),
-            //       child: const Center(child: Text('Item 2', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-            //     ),
-            //     Container(
-            //       height: 70,
-            //       color: const Color(0xFFFCF4E1),
-            //       child: const Center(child: Text('Item 3', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-            //     ),
-            //     Container(
-            //       height: 70,
-            //       color: const Color(0xFFFCF4E1),
-            //       child: const Center(child: Text('Item 4', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-            //     ),
-            //   ],
-            // ),
           ),
           const SizedBox(height: 2.0,),
           CustomElevatedButton(
