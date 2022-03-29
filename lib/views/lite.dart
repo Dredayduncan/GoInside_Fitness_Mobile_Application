@@ -4,6 +4,8 @@ import 'package:go_inside_fitness/common_widgets/payment_buttons.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'dart:io';
 
+import 'package:go_inside_fitness/views/thankyou_lite.dart';
+
 
 class Lite extends StatefulWidget {
 
@@ -59,7 +61,10 @@ class _LiteState extends State<Lite> {
     //check if the response is true or not
     if (response.status == true) {
       //you can send some data from the response to an API or use webhook to record the payment on a database
-      _showMessage('Payment was successful!!!');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ThankYouLite()),
+      );
     } else {
       //the payment wasn't successsful or the user cancelled the payment
       _showMessage('Payment Failed!!!');

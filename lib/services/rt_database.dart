@@ -16,15 +16,18 @@ class RTDatabase {
   }
 
   //Insert a new user into the database
-  Future<void> userSignUp({userID, fullName, contact, email, age, gender}) async {
+  Future<void> userSignUp({userID, fullName, contact, email, gender}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
 
     await ref.set({
       "fullName": fullName,
       "email": email,
-      "age": age,
       "gender": gender,
-      "contact": contact
+      "contact": contact,
+      "height": "",
+      "weight": "",
+      "goal": "",
+      "picture": ""
     });
 
   }
@@ -44,12 +47,59 @@ class RTDatabase {
     });
   }
 
+  // Update the user's package after purchase
   Future<void> userPackageUpdate({userID, package}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
 
     await ref.update({
       "package": package
     });
+  }
+
+  // Get user details
+  Future<Map> getUser({userID}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
+
+    final snap = await ref.get();
+
+    if (snap.exists){
+      var data = snap.value as Map;
+      return data;
+    }
+    else{
+      return {};
+    }
+  }
+
+  // Get the workouts for a particular day
+  Future<Map> getWorkouts({day, goal}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("DailyWorkouts/$goal/$day");
+
+    var snap = await ref.get();
+
+    if (snap.exists){
+      var data = snap.value as Map;
+      return data;
+    }
+    else{
+      return {};
+    }
+  }
+
+  // Get the meals for a particular day
+  // Get the workouts for a particular day
+  Future<Map> getMeals({day}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Meals/$day");
+
+    var snap = await ref.get();
+
+    if (snap.exists){
+      var data = snap.value as Map;
+      return data;
+    }
+    else{
+      return {};
+    }
   }
 
 }

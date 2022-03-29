@@ -5,13 +5,15 @@ class CustomTextField extends StatelessWidget {
   final double containerWidth;
   final double textFieldWidth;
   final String value;
+  final TextEditingController controller;
 
   const CustomTextField({
     Key? key,
     required this.labeledText,
     required this.containerWidth,
     required this.textFieldWidth,
-    required this.value
+    required this.value,
+    required this.controller
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class CustomTextField extends StatelessWidget {
           child: SizedBox(
             width: textFieldWidth,
             child: TextField(
+              controller: controller,
               style: const TextStyle(
                   color: Color(0xFFFCF4E1)
               ),

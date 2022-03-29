@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/customElevatedButton.dart';
 import 'package:go_inside_fitness/views/workouts.dart';
+import 'package:go_inside_fitness/widget_generators/meals.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Daily extends StatefulWidget {
@@ -14,6 +15,15 @@ class _DailyState extends State<Daily> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
+  late Meals _meals;
+  late Future<Widget> _getMeals;
+
+  @override
+  void initState() {
+    _meals = Meals();
+    _getMeals = _meals.getMeals(_selectedDay.weekday);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +65,7 @@ class _DailyState extends State<Daily> {
                   // Call `setState()` when updating the selected day
                   setState(() {
                     _selectedDay = selectedDay;
+                    _getMeals = _meals.getMeals(selectedDay.weekday);
                     // _focusedDay = focusedDay;
                   });
                 }
@@ -90,31 +101,41 @@ class _DailyState extends State<Daily> {
           ),
           const SizedBox(height: 2.0,),
           Expanded(
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                Container(
-                  height: 70,
-                  color: const Color(0xFFFCF4E1),
-                  child: const Center(child: Text('Item 1', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                ),
-                Container(
-                  height: 70,
-                  color: const Color(0xFFFCF4E1),
-                  child: const Center(child: Text('Item 2', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                ),
-                Container(
-                  height: 70,
-                  color: const Color(0xFFFCF4E1),
-                  child: const Center(child: Text('Item 3', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                ),
-                Container(
-                  height: 70,
-                  color: const Color(0xFFFCF4E1),
-                  child: const Center(child: Text('Item 4', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                ),
-              ],
-            ),
+            child: Scrollbar(
+              child: FutureBuilder(
+                  future: _getMeals,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData){
+                      return snapshot.data;
+                    }
+                    else {
+                      return
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            SizedBox(
+                              child: CircularProgressIndicator(
+                                color: Color(0xFFFCF4E1),
+                              ),
+                              width: 60,
+                              height: 60,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 16),
+                              child: Text(
+                                'Awaiting result...',
+                                style: TextStyle(
+                                    color: Color(0xFFFCF4E1)
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                    }
+                  }
+              ),
+            )
           ),
           const SizedBox(height: 2.0,),
           CustomElevatedButton(
@@ -122,7 +143,7 @@ class _DailyState extends State<Daily> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Workouts(theDate: _selectedDay,)),
+                MaterialPageRoute(builder: (context) => Workouts(goal: "Weight Loss", theDate: _selectedDay,)),
               );
             },
             color: const Color(0xFFFCF4E1),

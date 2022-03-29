@@ -1,12 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:go_inside_fitness/views/TypesOfPackages.dart';
+import 'package:go_inside_fitness/services/auth.dart';
+import 'package:go_inside_fitness/views/landingPage.dart';
+import 'firebase_options.dart';
 
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-void main() {
-  runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-      home: const TypesOfPackages()));
-
+  Auth auth = Auth();
+  runApp(MaterialApp(home: LandingPage(auth: auth,)));
 }
+
