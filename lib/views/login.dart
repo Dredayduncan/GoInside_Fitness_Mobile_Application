@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_inside_fitness/views/TypesOfPackages.dart';
 import 'package:go_inside_fitness/views/forgot_password.dart';
 import 'package:go_inside_fitness/views/screenManager.dart';
 import 'package:go_inside_fitness/views/signup.dart';
@@ -19,6 +20,7 @@ class _LoginState extends State<Login> {
   TextEditingController _password = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
+
 
   final Auth auth = Auth();
 
@@ -109,7 +111,7 @@ class _LoginState extends State<Login> {
                     width: 300.0,
                     decoration: BoxDecoration(
                         color: Colors.grey[500]?.withOpacity(0.5),
-                        borderRadius: const BorderRadius.all(const Radius.circular(50.0))
+                        borderRadius: const BorderRadius.all(Radius.circular(50.0))
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
@@ -159,13 +161,14 @@ class _LoginState extends State<Login> {
                       text: 'Log In',
                       onPressed: () {
                         if(_formkey.currentState!.validate()) {
-                          FirebaseAuth.instance.signInWithEmailAndPassword(
-                              email: emailController.text,
-                              password: _password.text).
+                          auth.signInWithEmailAndPassword(
+                              emailController.text,
+                              _password.text
+                          ).
                           then((value) {
                             Navigator.push(
                                 context, MaterialPageRoute(
-                                builder: (context) => ScreenManager(auth: auth))
+                                builder: (context) => TypesOfPackages(userID: value!.uid))
                             );
                           });
                         }

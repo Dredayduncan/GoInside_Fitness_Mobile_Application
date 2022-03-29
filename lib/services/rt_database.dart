@@ -47,6 +47,7 @@ class RTDatabase {
     });
   }
 
+  // Update the user's package after purchase
   Future<void> userPackageUpdate({userID, package}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
 
@@ -56,16 +57,47 @@ class RTDatabase {
   }
 
   // Get user details
-  Future<void> getUser({userID}) async {
+  Future<Object?> getUser({userID}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
 
     final snap = await ref.get();
 
     if (snap.exists){
-      print(snap.value);
+      return snap.value;
     }
     else{
-      print("Error");
+      return false;
+    }
+  }
+
+  // Get the workouts for a particular day
+  Future<Map> getWorkouts({day, goal}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("DailyWorkouts/$goal/$day");
+
+    var snap = await ref.get();
+
+    if (snap.exists){
+      var data = snap.value as Map;
+      return data;
+    }
+    else{
+      return {};
+    }
+  }
+
+  // Get the meals for a particular day
+  // Get the workouts for a particular day
+  Future<Map> getMeals({day}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Meals/$day");
+
+    var snap = await ref.get();
+
+    if (snap.exists){
+      var data = snap.value as Map;
+      return data;
+    }
+    else{
+      return {};
     }
   }
 
