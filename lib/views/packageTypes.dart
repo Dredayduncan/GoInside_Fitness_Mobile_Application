@@ -11,14 +11,14 @@ class PackagesTypes extends StatelessWidget {
           appBar: AppBar(
             elevation: 0.0,
             backgroundColor: const Color(0xFF2B120D),
-            title: Center(child: Text('Go Inside Fitness')),
+            title: const Center(child: Text('Go Inside Fitness')),
           ),
 
           body: Container(
 
             height: 450,
             width: 350,
-            padding: EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(30.0),
             child: GridView.count(
               crossAxisCount: 1,
               children: <Widget>[
@@ -30,7 +30,7 @@ class PackagesTypes extends StatelessWidget {
                     splashColor: Colors.amber,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
+                      children: const <Widget>[
                         Text("Lite"),
                         Text("GHS 160 | \$26"),
                         Text("Preview ->"),
@@ -44,7 +44,7 @@ class PackagesTypes extends StatelessWidget {
                     splashColor: Colors.amber,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
+                      children: const <Widget>[
                         Text("Lite"),
                         Text("GHS 250 | \$40"),
                         Text("Preview ->"),

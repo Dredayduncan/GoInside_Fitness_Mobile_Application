@@ -251,7 +251,7 @@ class _SignUpState extends State<SignUp> {
                             then((value) {
                               Navigator.pushReplacement(
                                   context, MaterialPageRoute(
-                                  builder: (context) => Login())
+                                  builder: (context) => Login(userEmail: value?.email))
                               );
                             });
                           }
@@ -263,7 +263,7 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context, MaterialPageRoute(
-                          builder: (context) => Login())
+                          builder: (context) => const Login(userEmail: "",))
                         );
                       },
                       child: const Text(

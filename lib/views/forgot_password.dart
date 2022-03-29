@@ -9,6 +9,10 @@ class ForgotPassword extends StatelessWidget {
 
   TextEditingController email = TextEditingController();
 
+  final String? userEmail;
+
+  ForgotPassword({Key? key, required this.userEmail}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +28,7 @@ class ForgotPassword extends StatelessWidget {
                 image: AssetImage("images/fitness.png"),
                 fit: BoxFit.cover),
           ),
-          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +42,7 @@ class ForgotPassword extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                const Text(
                   'FITNESS',
                   style: TextStyle(
                     color: Colors.white,
@@ -46,20 +50,20 @@ class ForgotPassword extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5.0),
-                Text(
+                const SizedBox(height: 5.0),
+                const Text(
                   'Forgot Password',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Container(
                   width: 300.0,
                   decoration: BoxDecoration(
                       color: Colors.grey[500]?.withOpacity(0.5),
-                      borderRadius: BorderRadius.all(Radius.circular(50.0))
+                      borderRadius: const BorderRadius.all(Radius.circular(50.0))
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
@@ -67,15 +71,15 @@ class ForgotPassword extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       autofillHints: [AutofillHints.email],
                       controller: email,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Email',
-                          icon: Icon(Icons.email, color: Colors.white),
+                          icon: const Icon(Icons.email, color: Colors.white),
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           )
@@ -86,16 +90,16 @@ class ForgotPassword extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 CustomElevatedButton(
                     text: 'Send Code',
                     onPressed: () async{
                       await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text).then((value) {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login(userEmail: userEmail)));
                       });
                     },
-                    color: Color(0xFFFCF4E1),
-                    textColor: Color(0xFF2B120D)
+                    color: const Color(0xFFFCF4E1),
+                    textColor: const Color(0xFF2B120D)
                 ),
               ],
             ),

@@ -9,6 +9,10 @@ import '../common_widgets/customElevatedButton.dart';
 import '../services/auth.dart';
 
 class Login extends StatefulWidget {
+  final String? userEmail;
+
+
+  const Login({Key? key, required this.userEmail}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -20,6 +24,12 @@ class _LoginState extends State<Login> {
   TextEditingController _password = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
+
+  @override
+  void initState() {
+    emailController.text = widget.userEmail!;
+    super.initState();
+  }
 
 
   final Auth auth = Auth();
@@ -145,7 +155,7 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           Navigator.push(
                               context, MaterialPageRoute(
-                              builder: (context) => ForgotPassword())
+                              builder: (context) => ForgotPassword(userEmail: widget.userEmail))
                           );
                         },
                         child: const Text(

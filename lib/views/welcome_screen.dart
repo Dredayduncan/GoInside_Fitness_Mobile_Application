@@ -11,7 +11,6 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //backgroundColor: Colors.grey[900],
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -32,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                const Text(
                   'FITNESS',
                   style: TextStyle(
                     color: Colors.white,
@@ -40,27 +39,27 @@ class WelcomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 CustomElevatedButton(
                   text: 'Sign In',
                   onPressed: () {
                     Navigator.push(
                       context, MaterialPageRoute(
-                      builder: (context) => Login())
+                      builder: (context) => const Login(userEmail: "",))
                     );
                   },
-                  color: Color(0xFFFCF4E1),
-                  textColor: Color(0xFF2B120D)
+                  color: const Color(0xFFFCF4E1),
+                  textColor: const Color(0xFF2B120D)
                 ),
-                SizedBox(height: 15.0),
-                Text(
+                const SizedBox(height: 15.0),
+                const Text(
                   'or',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold
                   )
                 ),
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 CustomElevatedButton(
                   text: 'Create a New Account',
                   onPressed: () {
@@ -69,8 +68,8 @@ class WelcomeScreen extends StatelessWidget {
                         builder: (context) => SignUp())
                     );
                   },
-                  color: Color(0xFFFCF4E1),
-                  textColor: Color(0xFF2B120D)
+                  color: const Color(0xFFFCF4E1),
+                  textColor: const Color(0xFF2B120D)
                 ),
               ],
             ),

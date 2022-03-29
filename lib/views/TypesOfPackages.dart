@@ -165,72 +165,79 @@ class TypesOfPackages extends StatelessWidget {
 
               //SizedBox(height: 20.0),
 
-              Center(
-                child: Container(
-
-                  height: 133,
-                  width: 271,
-                  child:
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    color: const Color(0xFF5A5A5A),
-                    //shape: RoundedRectangleBorder(),
-                    child: InkWell(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Premium()),
-                        );
-                      },
-                      splashColor: Colors.grey,
-
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: const Padding(
-                              padding: EdgeInsets.fromLTRB(15,8,0,8),
-                              child: Text("Premium",
-                                style: TextStyle(
-                                  //letterSpacing: 1.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25.0,
-                                  color: Colors.white,
-                                    fontFamily: "Montserrat"
-                                ),
-                              ),
-                            ),
-                          ),
-
-
-                          const Text("GHS 250 | \$40",
-                            style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25.0,
-                              color: Color(0xFF2B120D),
-                                fontFamily: "Montserrat"
-                            ),
-
-                          ),
-
-
-                          Align(
-                            alignment: Alignment.bottomRight,
-                              child: const Padding(
-                                padding: EdgeInsets.fromLTRB(0,12,8,0),
-                                child: Text("Preview", style: TextStyle(fontFamily: "Montserrat", color: Color(0xFFFCF4E1)),),
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+              const CustomPackageCard(
+                  page: Premium(),
+                  cost: "GHS 250 | \$40",
+                  cardColor: Color(0xFF5A5A5A),
+                  packageName: "Premium"
               ),
+
+              // Center(
+              //   child: Container(
+              //
+              //     height: 133,
+              //     width: 271,
+              //     child:
+              //     Card(
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(12),
+              //       ),
+              //       color: const Color(0xFF5A5A5A),
+              //       //shape: RoundedRectangleBorder(),
+              //       child: InkWell(
+              //         onTap: (){
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(builder: (context) => const Premium()),
+              //           );
+              //         },
+              //         splashColor: Colors.grey,
+              //
+              //         child: Column(
+              //           mainAxisSize: MainAxisSize.min,
+              //           children: <Widget>[
+              //
+              //             Align(
+              //               alignment: Alignment.topLeft,
+              //               child: const Padding(
+              //                 padding: EdgeInsets.fromLTRB(15,8,0,8),
+              //                 child: Text("Premium",
+              //                   style: TextStyle(
+              //                     //letterSpacing: 1.0,
+              //                     fontWeight: FontWeight.bold,
+              //                     fontSize: 25.0,
+              //                     color: Colors.white,
+              //                       fontFamily: "Montserrat"
+              //                   ),
+              //                 ),
+              //               ),
+              //             ),
+              //
+              //
+              //             const Text("GHS 250 | \$40",
+              //               style: TextStyle(
+              //                 letterSpacing: 1.0,
+              //                 fontWeight: FontWeight.bold,
+              //                 fontSize: 25.0,
+              //                 color: Color(0xFF2B120D),
+              //                   fontFamily: "Montserrat"
+              //               ),
+              //
+              //             ),
+              //
+              //
+              //             Align(
+              //               alignment: Alignment.bottomRight,
+              //                 child: const Padding(
+              //                   padding: EdgeInsets.fromLTRB(0,12,8,0),
+              //                   child: Text("Preview", style: TextStyle(fontFamily: "Montserrat", color: Color(0xFFFCF4E1)),),
+              //                 )),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
              // SizedBox(height: 50.0),
               

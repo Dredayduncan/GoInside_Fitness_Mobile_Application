@@ -57,16 +57,17 @@ class RTDatabase {
   }
 
   // Get user details
-  Future<Object?> getUser({userID}) async {
+  Future<Map> getUser({userID}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
 
     final snap = await ref.get();
 
     if (snap.exists){
-      return snap.value;
+      var data = snap.value as Map;
+      return data;
     }
     else{
-      return false;
+      return {};
     }
   }
 

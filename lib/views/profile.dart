@@ -19,7 +19,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   // Initial Selected Value
-  String dropdownValue = 'None';
+  late String dropdownValue;
 
   // List of items in our dropdown menu
   var goals = [
@@ -28,12 +28,44 @@ class _ProfileState extends State<Profile> {
     'Weight Loss',
   ];
 
+  //Create database variable
+  final RTDatabase db = RTDatabase();
+
   // Create text controllers for the various fields
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _contact = TextEditingController();
   final TextEditingController _height = TextEditingController();
   final TextEditingController _weight = TextEditingController();
+
+  //Create variable for name and email display
+  late String _userName;
+  late String _userEmail;
+
+  void populateFields() async {
+    await db.getUser(userID: widget.auth.currentUser?.uid).then((value) {
+      setState(() {
+        _name.text = value['fullName'];
+        _userName = value['fullName'];
+        _userEmail = value['email'];
+        _email.text = value['email'];
+        _contact.text = value['contact'];
+        _height.text = value['height'];
+        _weight.text = value['weight'];
+        dropdownValue = value['goal'];
+      });
+    });
+  }
+
+  @override
+  initState() {
+    //Initialize the text fields
+    dropdownValue = "None";
+    _userName = "None";
+    _userEmail = "None";
+    populateFields();
+    super.initState();
+  }
 
   // instantiate image picker option
   final ImagePicker _picker = ImagePicker();
@@ -104,18 +136,18 @@ class _ProfileState extends State<Profile> {
                         padding: const EdgeInsets.all(6.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              "John Doe",
-                              style: TextStyle(
+                              _userName,
+                              style: const TextStyle(
                                 fontFamily: "Montserrat",
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFFFCF4E1)
                               ),
                             ),
-                            Text("theperson@gmail.com",
-                              style: TextStyle(
+                            Text(_userEmail,
+                              style: const TextStyle(
                                   fontFamily: "Montserrat",
                                   fontSize: 14,
                                   color: Color(0xFFFCF4E1)
@@ -273,10 +305,9 @@ class _ProfileState extends State<Profile> {
             CustomElevatedButton(
               text: "Save Profile",
               onPressed: () {
-                // print([_name.text, _email.text, _contact.text, _height.text, _weight.text, dropdownValue]);
                 try{
                   RTDatabase().userProfileUpdate(
-                      userID: 0,
+                      userID: widget.auth.currentUser?.uid,
                       email: _email.text,
                       fullName: _name.text,
                       contact: _contact.text,
@@ -286,8 +317,13 @@ class _ProfileState extends State<Profile> {
                       picture: ""
                   );
 
+                  setState(() {
+                    populateFields();
+                  });
+
                   return StatusAlert.show(
                     context,
+                    backgroundColor: const Color(0xFFFCF4E1),
                     duration: const Duration(seconds: 2),
                     title: 'Success',
                     subtitle: 'Your profile has been successfully updated.',
@@ -296,6 +332,7 @@ class _ProfileState extends State<Profile> {
                 } catch (e){
                   return StatusAlert.show(
                     context,
+                    backgroundColor: const Color(0xFFFCF4E1),
                     duration: const Duration(seconds: 2),
                     title: 'Error',
                     subtitle: 'Your profile could not be updated.',

@@ -77,7 +77,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                       widget.auth.signOut();
                       Navigator.pushReplacement(
                           context, MaterialPageRoute(
-                          builder: (context) => Login())
+                          builder: (context) => Login(userEmail: widget.auth.currentUser?.email,))
                       );
                     },
                     icon: const Icon(Icons.logout))
