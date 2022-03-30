@@ -4,10 +4,11 @@ import 'package:go_inside_fitness/widget_generators/workouts_and_tutorials.dart'
 
 class Workouts extends StatelessWidget {
   final DateTime theDate;
+  final String goal;
   late WorkoutsAndTutorials tabViewer;
 
-  Workouts({Key? key, required this.theDate}) : super(key: key){
-    tabViewer = WorkoutsAndTutorials(theDate: theDate);
+  Workouts({Key? key, required this.goal, required this.theDate}) : super(key: key){
+    tabViewer = WorkoutsAndTutorials(goal: goal, theDate: theDate.weekday);
   }
 
   @override
@@ -34,7 +35,39 @@ class Workouts extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            tabViewer.viewWorkouts(),
+            FutureBuilder(
+              future: tabViewer.viewWorkouts(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData){
+                  return snapshot.data;
+                }
+                else {
+                  return
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        SizedBox(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFFFCF4E1),
+                          ),
+                          width: 60,
+                          height: 60,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 16),
+                          child: Text(
+                            'Awaiting result...',
+                            style: TextStyle(
+                              color: Color(0xFFFCF4E1)
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                }
+              }
+            ),
             tabViewer.viewTutorials()
           ],
         ),

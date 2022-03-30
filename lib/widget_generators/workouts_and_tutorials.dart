@@ -1,61 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/videoItems.dart';
 import 'package:go_inside_fitness/common_widgets/workoutItem.dart';
+import 'package:go_inside_fitness/services/rt_database.dart';
 
 class WorkoutsAndTutorials {
-  final DateTime theDate;
+  final int theDate;
+  final String goal;
+  // Create workout and description variables
+  late List dailyWorkouts;
+  late String description;
+  final RTDatabase db = RTDatabase();
+
+  final Map days = {
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+    7: "Sunday"
+  };
 
   WorkoutsAndTutorials({
-    required this.theDate
+    required this.goal,
+    required this.theDate,
   });
 
-  Widget viewWorkouts(){
-    return Scrollbar(
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        children: const [
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
+  Future<Widget> viewWorkouts() async {
+
+    return await db.getWorkouts(
+      day: days[theDate],
+      goal: goal
+    ).then((value) {
+      if (value.isEmpty){
+        return const Center(
+          child: Text(
+            "There are no workouts for today.",
+            style: TextStyle(
+              color: Color(0xFFFCF4E1)
+            ),
           ),
-          SizedBox(height: 5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-          SizedBox(height: 5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-          SizedBox(height: 5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-          SizedBox(height: 5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-          SizedBox(height:5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-          SizedBox(height: 5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-          SizedBox(height: 5.0,),
-          WorkoutItem(
-              label: "Workout Name",
-              body: "Number of reps | Number of sets"
-          ),
-        ],
-      ),
-    );
+        );
+      }
+      else{
+        var desc = value['description'];
+        List dailyWorkouts = value['workouts'];
+
+        final children = <Widget>[];
+
+        for (var i = 0; i < dailyWorkouts.length; i++) {
+          children.add(
+              WorkoutItem(
+              label: dailyWorkouts[i]['name'],
+              body: dailyWorkouts[i]['repNumber'].toString()
+             )
+          );
+        }
+
+        return Scrollbar(
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: children,
+          )
+        );
+      }
+    });
   }
 
   Widget viewTutorials(){

@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/timerActionButton.dart';
-// import 'package:flutter_countdown_timer/countdown.dart';
-// import 'package:flutter_countdown_timer/countdown_controller.dart';
-// import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
-// import 'package:flutter_countdown_timer/current_remaining_time.dart';
-// import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 class WorkoutTracker extends StatefulWidget {
   const WorkoutTracker({Key? key}) : super(key: key);
@@ -16,31 +11,6 @@ class WorkoutTracker extends StatefulWidget {
 
 class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStateMixin{
 
-  // int endTime = DateTime
-  //     .now()
-  //     .millisecondsSinceEpoch + 1000 * 30;
-  // CountdownTimerController countdownTimerController = CountdownTimerController(
-  //     endTime: DateTime.now().millisecondsSinceEpoch + 1000 * 30, onEnd: () => print('onEnd'),
-  // );
-  //
-  // CountdownController countdownController = CountdownController(
-  //     duration: Duration(minutes: 1),
-  // );
-  // // countdownTimerController =
-  //
-  // void dispose() {
-  //   countdownTimerController.dispose();
-  //   super.dispose();
-  // }
-  //
-  // // void initState() {
-  // //   super.initState();
-  // //   countdownTimerController = CountdownTimerController(endTime: endTime, onEnd: onEnd);
-  // // }
-  //
-  // void onEnd() {
-  //   print('onEnd');
-  // }
   late AnimationController controller;
 
   bool isPlaying = false;
@@ -66,7 +36,7 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 60),
+      duration: const Duration(seconds: 60),
     );
 
     controller.addListener(() {
@@ -98,66 +68,22 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
         child: Column(
             children: [
               const SizedBox(height: 15.0,),
-              const Text(
-                "Workout Name",
-                style: TextStyle(
-                    color: Color(0xFFFCF4E1),
-                    fontFamily: "Quicksand",
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
+              const SizedBox(
+                width: 300,
+                child: Text(
+                  "Time your workouts! Tap the time to set your time and Go Inside!",
+                  style: TextStyle(
+                      color: Color(0xFFFCF4E1),
+                      fontFamily: "Quicksand",
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 15.0,),
               _buildTimer(),
               const SizedBox(height: 15.0,),
               _buildButtons(),
-              const SizedBox(height: 10.0,),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(width: 2.0, color: Color(0xFFFCF4E1))
-                      )
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Workouts",
-                      style: TextStyle(
-                          color: Color(0xFFFCF4E1),
-                          fontSize: 22.0,
-                          fontFamily: "Quicksand"
-                      ),
-                    ),
-                  )
-              ),
-              const SizedBox(height: 2.0,),
-              Expanded(
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  children: <Widget>[
-                    Container(
-                      height: 70,
-                      color: const Color(0xFFFCF4E1),
-                      child: const Center(child: Text('Item 1', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                    ),
-                    Container(
-                      height: 70,
-                      color: const Color(0xFFFCF4E1),
-                      child: const Center(child: Text('Item 2', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                    ),
-                    Container(
-                      height: 70,
-                      color: const Color(0xFFFCF4E1),
-                      child: const Center(child: Text('Item 3', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                    ),
-                    Container(
-                      height: 70,
-                      color: const Color(0xFFFCF4E1),
-                      child: const Center(child: Text('Item 4', style: TextStyle(fontSize: 18, color: Color(0xFF2B120D)),)),
-                    ),
-                  ],
-                ),
-              ),
             ]
         ),
       ),
@@ -184,7 +110,7 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
                 });
               }
             },
-            child: timerActionButton(
+            child: TimerActionButton(
               icon: isPlaying == true ? Icons.pause : Icons.play_arrow,
             )
           ),
@@ -195,7 +121,7 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
                 isPlaying = false;
               });
             },
-            child: const timerActionButton(
+            child: const TimerActionButton(
               icon: Icons.stop,
             )
           ),

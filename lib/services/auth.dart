@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_inside_fitness/services/rt_database.dart';
 
 class Auth {
 
@@ -13,19 +14,40 @@ class Auth {
 
   // Sign in with email and password
   Future<User?> signInWithEmailAndPassword(String email, String password) async {
-    final userCredential = await _firebaseAuth.signInWithCredential(
-        EmailAuthProvider.credential(email: email, password: password)
-    );
+    try{
+      final userCredential = await _firebaseAuth.signInWithCredential(
+          EmailAuthProvider.credential(email: email, password: password)
+      );
 
-    return userCredential.user;
+      return userCredential.user;
+    }
+    catch (e){
+      return null;
+    }
+
+
+
   }
 
   // Sign up with email and password
-  Future<User?>createUserWithEmailAndPassword(String email, String password) async {
+  Future<User?>createUserWithEmailAndPassword({required String email, required String password, required String name, required String contact, required String gender}) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password
     );
+
+    try {
+      RTDatabase().userSignUp(
+          userID: userCredential.user?.uid,
+          fullName: name,
+          contact: contact,
+          email: userCredential.user?.email,
+          gender: gender
+      );
+    } catch (e) {
+      return null;
+    }
+
 
     return userCredential.user;
   }
