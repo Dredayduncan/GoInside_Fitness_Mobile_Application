@@ -204,7 +204,7 @@ class _LoginState extends State<Login> {
 
                             return Navigator.push(
                                 context, MaterialPageRoute(
-                                builder: (context) => TypesOfPackages(userID: value.uid))
+                                builder: (context) => TypesOfPackages(auth: auth))
                             );
 
                           });

@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_inside_fitness/common_widgets/customInfoText.dart';
+import 'package:go_inside_fitness/common_widgets/customStatusAlert.dart';
 import 'package:go_inside_fitness/common_widgets/payment_buttons.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:go_inside_fitness/views/screenManager.dart';
 import 'dart:io';
 
-import 'package:go_inside_fitness/views/thankyou_lite.dart';
+// import 'package:go_inside_fitness/views/thankyou_lite.dart';
+import 'package:status_alert/status_alert.dart';
+import '../services/auth.dart';
+import '../services/rt_database.dart';
 
 
 class Lite extends StatefulWidget {
+  final Auth auth;
+
+  const Lite({Key? key, required this.auth}) : super(key: key);
+
 
   @override
   State<Lite> createState() => _LiteState();
@@ -28,12 +37,6 @@ class _LiteState extends State<Lite> {
     super.initState();
   }
 
-  //a method to show the message
-  void _showMessage(String message) {
-    final snackBar = SnackBar(content: Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
   //used to generate a unique reference for payment
   String _getReference() {
     var platform = (Platform.isIOS) ? 'iOS' : 'Android';
@@ -48,7 +51,7 @@ class _LiteState extends State<Lite> {
       ..reference = _getReference()
       ..putCustomField('custom_id',
           '846gey6w') //to pass extra parameters to be retrieved on the response from Paystack
-      ..email = 'tutorial@email.com'
+      ..email = widget.auth.currentUser?.email
       ..currency = 'GHS'
     ;
 
@@ -61,13 +64,28 @@ class _LiteState extends State<Lite> {
     //check if the response is true or not
     if (response.status == true) {
       //you can send some data from the response to an API or use webhook to record the payment on a database
+
+      // Update the database with the payment info
+      RTDatabase().userPackageUpdate(
+        userID: widget.auth.currentUser?.uid,
+        package: "Lite",
+      );
+
+      // Redirect to home screen
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ThankYouLite()),
+        MaterialPageRoute(builder: (context) => ScreenManager(auth: widget.auth)),
       );
     } else {
-      //the payment wasn't successsful or the user cancelled the payment
-      _showMessage('Payment Failed!!!');
+      //the payment wasn't successful or the user cancelled the payment
+      return CustomStatusAlert().show(
+          context: context,
+          title: "Error",
+          subtitle: "Payment was unsuccessful",
+          icon: Icons.error_outline,
+          backgroundColor: const Color(0xFF2B120D),
+          color: const Color(0xFFFCF4E1)
+      );
     }
   }
 
@@ -77,15 +95,16 @@ class _LiteState extends State<Lite> {
         appBar: AppBar(
           backgroundColor: const Color(0xFFFCF4E1),
           elevation: 0,
+          foregroundColor: const Color(0xFF2B120D),
         ),
 
 
         body: Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
+              const Center(
                   child: Text("GO INSIDE",
                     style: TextStyle(letterSpacing: 2.0,
                       fontWeight: FontWeight.bold,
@@ -96,7 +115,7 @@ class _LiteState extends State<Lite> {
                   )
               ),
 
-              Center(
+              const Center(
                 child: Text("FITNESS",
                   style: TextStyle(letterSpacing: 2.0,
                     fontWeight: FontWeight.bold,
@@ -106,8 +125,8 @@ class _LiteState extends State<Lite> {
                   ),
                 ),
               ),
-              SizedBox(height: 10.0),
-              Center(
+              const SizedBox(height: 10.0),
+              const Center(
                 child: Text("Lite",
                   style: TextStyle(letterSpacing: 1.0,
                     fontSize: 15.0,
@@ -117,7 +136,7 @@ class _LiteState extends State<Lite> {
                 ),
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               Expanded(
                 child: Center(
@@ -139,12 +158,12 @@ class _LiteState extends State<Lite> {
 
               Center(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 45.0),
+                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 45.0),
                   child: PayButton(
                       text: "Purchase",
                     callback: () => chargeCard(),
-                      color: Color(0xFF2B120D),
-                      textColor: Color(0xFFFCF4E1),
+                      color: const Color(0xFF2B120D),
+                      textColor: const Color(0xFFFCF4E1),
                   ),
                 ),
               )

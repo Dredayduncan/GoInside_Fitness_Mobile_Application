@@ -19,11 +19,14 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   // Initial Selected Value
-  late String dropdownValue;
+  late String _dropdownValue;
+  Widget _currentPage = const CircularProgressIndicator(
+    color: Color(0xFFFCF4E1),
+  );
 
   // List of items in our dropdown menu
-  var goals = [
-    'None',
+  final List<String> goals = [
+    "None",
     'Weight Gain',
     'Weight Loss',
   ];
@@ -42,7 +45,7 @@ class _ProfileState extends State<Profile> {
   late String _userName;
   late String _userEmail;
 
-  void populateFields() async {
+  Future<bool> _populateFields() async {
     await db.getUser(userID: widget.auth.currentUser?.uid).then((value) {
       setState(() {
         _name.text = value['fullName'];
@@ -52,18 +55,27 @@ class _ProfileState extends State<Profile> {
         _contact.text = value['contact'];
         _height.text = value['height'];
         _weight.text = value['weight'];
-        dropdownValue = value['goal'];
+        _dropdownValue = value['goal'] != "" ? value['goal'] : "None";
       });
+
+      return true;
+    });
+
+    return false;
+  }
+
+  void navigationPage() async {
+    await _populateFields();
+
+    setState(() {
+      _currentPage = _buildProfile();
     });
   }
 
   @override
   initState() {
     //Initialize the text fields
-    dropdownValue = "None";
-    _userName = "None";
-    _userEmail = "None";
-    populateFields();
+    navigationPage();
     super.initState();
   }
 
@@ -73,10 +85,8 @@ class _ProfileState extends State<Profile> {
   //diplay profile picture
   String _dp = "images/profile.jpeg";
 
-  final picker = ImagePicker();
-
   Future getImage() async {
-    final File pickedImage = (await picker.pickImage(source: ImageSource.gallery)) as File;
+    final File pickedImage = (await _picker.pickImage(source: ImageSource.gallery)) as File;
 
 
     File tmpFile = File(pickedImage.path);
@@ -90,6 +100,12 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    return Center(
+      child: _currentPage,
+    );
+  }
+
+  Widget _buildProfile(){
     return Scaffold(
       backgroundColor: const Color(0xFF2B120D),
       body: SingleChildScrollView(
@@ -99,8 +115,8 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.all(6.0),
               child: Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Color(0xFF5A5A5A)
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    color: Color(0xFF5A5A5A)
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -113,22 +129,22 @@ class _ProfileState extends State<Profile> {
                             minRadius: 50.0,
                           ),
                           Positioned(
-                            bottom: 5,
-                            right: 0,
-                            child: Container(
-                              height: 35.0,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xFFFCF4E1),
-                              ),
-                              child: IconButton(
-                                  iconSize: 20.0,
-                                  onPressed: () {
-                                    getImage();
+                              bottom: 5,
+                              right: 0,
+                              child: Container(
+                                height: 35.0,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xFFFCF4E1),
+                                ),
+                                child: IconButton(
+                                    iconSize: 20.0,
+                                    onPressed: () {
+                                      getImage();
 
-                                  },
-                                  icon: const Icon(Icons.camera_alt_rounded)),
-                            )
+                                    },
+                                    icon: const Icon(Icons.camera_alt_rounded)),
+                              )
                           )
                         ],
                       ),
@@ -140,18 +156,18 @@ class _ProfileState extends State<Profile> {
                             Text(
                               _userName,
                               style: const TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFFCF4E1)
+                                  fontFamily: "Montserrat",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFFCF4E1)
                               ),
                             ),
                             Text(_userEmail,
-                              style: const TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 14,
-                                  color: Color(0xFFFCF4E1)
-                              )
+                                style: const TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 14,
+                                    color: Color(0xFFFCF4E1)
+                                )
                             )
                           ],
                         ),
@@ -162,31 +178,31 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             CustomTextField(
-              controller: _name,
-              value: "",
-              labeledText: "Your Name",
-              containerWidth: 360.0,
-              textFieldWidth: 300.0
+                controller: _name,
+                value: "",
+                labeledText: "Your Name",
+                containerWidth: 360.0,
+                textFieldWidth: 300.0
             ),
 
             const SizedBox(height: 10.0,),
 
             CustomTextField(
-              controller: _email,
-              value: "",
-              labeledText: "Your Email",
-              containerWidth: 360.0,
-              textFieldWidth: 300.0
+                controller: _email,
+                value: "",
+                labeledText: "Your Email",
+                containerWidth: 360.0,
+                textFieldWidth: 300.0
             ),
 
             const SizedBox(height: 10.0,),
 
             CustomTextField(
-              controller: _contact,
-              value: "",
-              labeledText: "Contact",
-              containerWidth: 360.0,
-              textFieldWidth: 300.0
+                controller: _contact,
+                value: "",
+                labeledText: "Contact",
+                containerWidth: 360.0,
+                textFieldWidth: 300.0
             ),
 
             const SizedBox(height: 10.0,),
@@ -195,21 +211,21 @@ class _ProfileState extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomTextField(
-                  controller: _height,
-                  value: "",
-                  labeledText: "Height",
-                  containerWidth: 150.0,
-                  textFieldWidth: 100.0
+                    controller: _height,
+                    value: "",
+                    labeledText: "Height",
+                    containerWidth: 150.0,
+                    textFieldWidth: 100.0
                 ),
 
                 const SizedBox(width: 10.0,),
 
                 CustomTextField(
-                  controller: _weight,
-                  value: "",
-                  labeledText: "Weight",
-                  containerWidth: 150.0,
-                  textFieldWidth: 100.0
+                    controller: _weight,
+                    value: "",
+                    labeledText: "Weight",
+                    containerWidth: 150.0,
+                    textFieldWidth: 100.0
                 ),
               ],
             ),
@@ -224,80 +240,80 @@ class _ProfileState extends State<Profile> {
             const SizedBox(height: 10.0,),
 
             Container(
-                height: 60,
-                width: 360,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    color: Color(0xFF5A5A5A)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 25.0, top: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "GOAL",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w300
-                        ),
+              height: 60,
+              width: 360,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Color(0xFF5A5A5A)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 25.0, top: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "GOAL",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300
                       ),
-                      SizedBox(
-                        height: 32,
-                        width: 300,
-                        child: DropdownButton(
-                          isExpanded: true,
+                    ),
+                    SizedBox(
+                      height: 32,
+                      width: 300,
+                      child: DropdownButton(
+                        isExpanded: true,
 
-                          style: const TextStyle(
+                        style: const TextStyle(
                             color: Color(0xFF2B120D)
-                          ),
+                        ),
 
-                          // Initial Value
-                          value: dropdownValue,
+                        // Initial Value
+                        value: _dropdownValue,
 
-                          // Down Arrow Icon
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xFFFCF4E1),
-                          ),
+                        // Down Arrow Icon
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Color(0xFFFCF4E1),
+                        ),
 
-                          // Array list of items
-                          items: goals.map((String item) {
-                            return DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    color: Color(0xFF2B120D),
-                                  ),
+                        // Array list of items
+                        items: goals.map((String item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                color: Color(0xFF2B120D),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+
+                        selectedItemBuilder: (BuildContext context) {
+                          return goals.map((String value) {
+                            return Text(
+                              _dropdownValue,
+                              style: const TextStyle(
+                                color: Color(0xFFFCF4E1),
                               ),
                             );
-                          }).toList(),
+                          }).toList();
+                        },
 
-                          selectedItemBuilder: (BuildContext context) {
-                            return goals.map((String value) {
-                              return Text(
-                                dropdownValue,
-                                style: const TextStyle(
-                                  color: Color(0xFFFCF4E1),
-                                ),
-                              );
-                            }).toList();
-                          },
-
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownValue = newValue!;
-                            });
-                          },
-                        ),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _dropdownValue = newValue!;
+                          });
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+              ),
             ),
 
 
@@ -312,14 +328,14 @@ class _ProfileState extends State<Profile> {
                       email: _email.text,
                       fullName: _name.text,
                       contact: _contact.text,
-                      goal: dropdownValue,
+                      goal: _dropdownValue,
                       height: _height.text,
                       weight: _weight.text,
                       picture: ""
                   );
 
                   setState(() {
-                    populateFields();
+                    _populateFields();
                   });
 
                   return StatusAlert.show(

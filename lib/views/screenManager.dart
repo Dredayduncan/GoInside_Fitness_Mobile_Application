@@ -85,10 +85,14 @@ class _ScreenManagerState extends State<ScreenManager> {
                                   child: const Text('No'),
                                 ),
                                 TextButton(
-                                  onPressed: () => Navigator.pushReplacement(
-                                      context, MaterialPageRoute(
-                                      builder: (context) => Login(user: widget.auth.currentUser,))
-                                  ),
+                                  onPressed: () {
+                                    var user = widget.auth.currentUser;
+                                    widget.auth.signOut();
+                                    Navigator.pushReplacement(
+                                        context, MaterialPageRoute(
+                                        builder: (context) => Login(user: user,))
+                                    );
+                                  },
                                   child: const Text('Yes'),
                                 ),
                               ],
@@ -96,9 +100,6 @@ class _ScreenManagerState extends State<ScreenManager> {
                           },
                           context: context
                       );
-
-                      widget.auth.signOut();
-
                     },
                     icon: const Icon(Icons.logout))
               ] : [],

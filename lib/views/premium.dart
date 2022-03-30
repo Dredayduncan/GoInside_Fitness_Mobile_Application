@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:go_inside_fitness/views/screenManager.dart';
 import 'dart:io';
 
+import '../common_widgets/customStatusAlert.dart';
 import '../common_widgets/payment_buttons.dart';
+import '../services/auth.dart';
+import '../services/rt_database.dart';
 
 
 class Premium extends StatefulWidget {
-  const Premium({Key? key}) : super(key: key);
+  final Auth auth;
+
+  const Premium({Key? key, required this.auth}) : super(key: key);
 
   @override
   State<Premium> createState() => _PremiumState();
@@ -16,7 +22,7 @@ class _PremiumState extends State<Premium> {
 
   //pass in the public test key obtained from paystack dashboard here
   String publicKeyTest =
-      'pk_test_ieu49ej839u984urenewuwe06eishra';
+      'pk_test_3c8f00971bc23d4fa34fafe4a8cf1a629524b261';
 
   final plugin = PaystackPlugin();
 
@@ -45,12 +51,12 @@ class _PremiumState extends State<Premium> {
   //async method to charge users card and return a response
   chargeCard() async {
     var charge = Charge()
-      ..amount = 10000 *
-          100 //the money should be in kobo hence the need to multiply the value by 100
+      ..amount = 250 * 100 //the money should be in kobo hence the need to multiply the value by 100
       ..reference = _getReference()
       ..putCustomField('custom_id',
           '846gey6w') //to pass extra parameters to be retrieved on the response from Paystack
-      ..email = 'tutorial@email.com';
+      ..email = widget.auth.currentUser?.email
+      ..currency = "GHS";
 
     CheckoutResponse response = await plugin.checkout(
       context,
@@ -61,10 +67,28 @@ class _PremiumState extends State<Premium> {
     //check if the response is true or not
     if (response.status == true) {
       //you can send some data from the response to an API or use webhook to record the payment on a database
-      _showMessage('Payment was successful!!!');
+
+      // Update the database with the payment info
+      RTDatabase().userPackageUpdate(
+        userID: widget.auth.currentUser?.uid,
+        package: "Premium",
+      );
+
+      // Redirect to home screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ScreenManager(auth: widget.auth)),
+      );
     } else {
-      //the payment wasn't successsful or the user cancelled the payment
-      _showMessage('Payment Failed!!!');
+      //the payment wasn't successful or the user cancelled the payment
+      return CustomStatusAlert().show(
+          context: context,
+          title: "Error",
+          subtitle: "Payment was unsuccessful",
+          icon: Icons.error_outline,
+          backgroundColor: const Color(0xFFFCF4E1),
+          color: const Color(0xFF2B120D)
+      );
     }
   }
 

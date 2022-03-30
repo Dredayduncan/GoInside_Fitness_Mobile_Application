@@ -48,14 +48,14 @@ class RTDatabase {
   }
 
   // Update the user's package after purchase
-  Future<void> userPackageUpdate({userID, package, expiry}) async {
+  Future<void> userPackageUpdate({userID, package}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
     var date = DateTime.now();
 
     await ref.update({
       "package": package,
-      "packagePurchased": date,
-      "packageExpiry": date.add(const Duration(days: 56))
+      "packagePurchased": date.toString(),
+      "packageExpiry": date.add(const Duration(days: 56)).toString()
     });
   }
 

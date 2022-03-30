@@ -5,9 +5,9 @@ import 'package:go_inside_fitness/views/lite.dart';
 import 'package:go_inside_fitness/views/premium.dart';
 
 class TypesOfPackages extends StatelessWidget {
-  final String userID;
+  final Auth auth;
 
-  const TypesOfPackages({Key? key, required this.userID}) : super(key: key);
+  TypesOfPackages({Key? key, required this.auth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class TypesOfPackages extends StatelessWidget {
 
                 CustomPackageCard(
                     packageName: "Lite",
-                    page: Lite(),
+                    page: Lite(auth: auth),
                     cost: "GHS 160 | \$26",
                     cardColor: const Color(0xFFFCF4E1)
                 ),
@@ -166,10 +166,10 @@ class TypesOfPackages extends StatelessWidget {
 
                 //SizedBox(height: 20.0),
 
-                const CustomPackageCard(
-                    page: Premium(),
+                CustomPackageCard(
+                    page: Premium(auth: auth,),
                     cost: "GHS 250 | \$40",
-                    cardColor: Color(0xFF5A5A5A),
+                    cardColor: const Color(0xFF5A5A5A),
                     packageName: "Premium"
                 ),
 
