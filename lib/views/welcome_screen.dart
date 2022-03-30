@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context, MaterialPageRoute(
-                      builder: (context) => const Login(userEmail: "",))
+                      builder: (context) => const Login())
                     );
                   },
                   color: const Color(0xFFFCF4E1),

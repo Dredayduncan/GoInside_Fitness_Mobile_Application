@@ -19,6 +19,8 @@ class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _confirmpassword = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey();
 
@@ -41,8 +43,8 @@ class _SignUpState extends State<SignUp> {
                 fit: BoxFit.cover),
           ),
           padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-          child: SingleChildScrollView(
-            child: Center(
+          child: Center(
+            child: SingleChildScrollView(
               child: Form(
                 key: _formkey,
                 child: Column(
@@ -83,6 +85,7 @@ class _SignUpState extends State<SignUp> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15.0),
                         child: TextFormField(
+                          controller: _nameController,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -151,6 +154,7 @@ class _SignUpState extends State<SignUp> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15.0),
                         child: TextFormField(
+                          controller: _phoneController,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               border: InputBorder.none,
@@ -245,13 +249,16 @@ class _SignUpState extends State<SignUp> {
                         onPressed: () {
                           if(_formkey.currentState!.validate()) {
                             auth.createUserWithEmailAndPassword(
-                                emailController.text,
-                                _password.text
+                              email: emailController.text,
+                              password: _password.text,
+                              name: _nameController.text,
+                              gender: "",
+                              contact: _phoneController.text,
                             ).
                             then((value) {
                               Navigator.pushReplacement(
                                   context, MaterialPageRoute(
-                                  builder: (context) => Login(userEmail: value?.email))
+                                  builder: (context) => Login(user: value!))
                               );
                             });
                           }
@@ -263,7 +270,7 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context, MaterialPageRoute(
-                          builder: (context) => const Login(userEmail: "",))
+                          builder: (context) => const Login())
                         );
                       },
                       child: const Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class timerActionButton extends StatelessWidget {
-  const timerActionButton({
+class TimerActionButton extends StatelessWidget {
+  const TimerActionButton({
     Key? key,
     required this.icon,
   }) : super(key: key);
@@ -15,10 +15,10 @@ class timerActionButton extends StatelessWidget {
       ),
       child: CircleAvatar(
         backgroundColor: const Color(0xFFFCF4E1),
-        radius: 25,
+        radius: 35,
         child: Icon(
           icon,
-          size: 30,
+          size: 50,
           color: const Color(0xFF2B120D),
         ),
       ),

@@ -48,12 +48,43 @@ class RTDatabase {
   }
 
   // Update the user's package after purchase
-  Future<void> userPackageUpdate({userID, package}) async {
+  Future<void> userPackageUpdate({userID, package, expiry}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
+    var date = DateTime.now();
 
     await ref.update({
-      "package": package
+      "package": package,
+      "packagePurchased": date,
+      "packageExpiry": date.add(const Duration(days: 56))
     });
+  }
+
+  // Check if a user is a client
+  Future<bool> isUserClient({userID}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Users/$userID");
+
+    final snap = await ref.get();
+
+    // Check if a result is returned
+    if (snap.exists){
+
+      var data = snap.value as Map;
+
+      if (data['package'] == null){
+        return false;
+      }
+
+      //Check if the expiry date has passed
+      if (DateTime.now().compareTo(DateTime.parse(data['packageExpiry'])) > 0){
+        return false;
+      }
+
+      // Package has not expired
+      return true;
+    }
+
+    return false;
+
   }
 
   // Get user details

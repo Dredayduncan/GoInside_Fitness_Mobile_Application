@@ -305,6 +305,7 @@ class _ProfileState extends State<Profile> {
             CustomElevatedButton(
               text: "Save Profile",
               onPressed: () {
+
                 try{
                   RTDatabase().userProfileUpdate(
                       userID: widget.auth.currentUser?.uid,

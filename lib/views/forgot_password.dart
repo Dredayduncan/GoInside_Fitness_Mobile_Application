@@ -9,9 +9,9 @@ class ForgotPassword extends StatelessWidget {
 
   TextEditingController email = TextEditingController();
 
-  final String? userEmail;
+  final User user;
 
-  ForgotPassword({Key? key, required this.userEmail}) : super(key: key);
+  ForgotPassword({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class ForgotPassword extends StatelessWidget {
                     text: 'Send Code',
                     onPressed: () async{
                       await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text).then((value) {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login(userEmail: userEmail)));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login(user: user)));
                       });
                     },
                     color: const Color(0xFFFCF4E1),

@@ -74,11 +74,31 @@ class _ScreenManagerState extends State<ScreenManager> {
               actions: _selectedIndex == 2 ? [
                 IconButton(
                     onPressed: () {
-                      widget.auth.signOut();
-                      Navigator.pushReplacement(
-                          context, MaterialPageRoute(
-                          builder: (context) => Login(userEmail: widget.auth.currentUser?.email,))
+                      showDialog(
+                          builder: (BuildContext context) { 
+                            return AlertDialog(
+                              title: const Text('Sign Out'),
+                              content: const Text('Are you sure you want to sign out?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'No'),
+                                  child: const Text('No'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pushReplacement(
+                                      context, MaterialPageRoute(
+                                      builder: (context) => Login(user: widget.auth.currentUser,))
+                                  ),
+                                  child: const Text('Yes'),
+                                ),
+                              ],
+                            );
+                          },
+                          context: context
                       );
+
+                      widget.auth.signOut();
+
                     },
                     icon: const Icon(Icons.logout))
               ] : [],
