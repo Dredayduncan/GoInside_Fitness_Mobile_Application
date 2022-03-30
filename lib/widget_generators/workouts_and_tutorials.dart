@@ -43,10 +43,35 @@ class WorkoutsAndTutorials {
         );
       }
       else{
-        var desc = value['description'];
+        var desc = value['description'] != "" ? value['description'] : "There is no extra info on today's workouts.";
         List dailyWorkouts = value['workouts'];
 
         final children = <Widget>[];
+        children.add(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.info,
+                  color: Color(0xFFFCF4E1),
+                  size: 40,
+                ),
+                const SizedBox(width: 10),
+                SizedBox(
+                width: 300,
+                child: Text(
+                  desc,
+                  style: const TextStyle(
+                    color: Color(0xFFFCF4E1),
+                    fontSize: 16
+                  ),
+                ),
+              ),
+            ]
+            ),
+          )
+        );
 
         for (var i = 0; i < dailyWorkouts.length; i++) {
           children.add(

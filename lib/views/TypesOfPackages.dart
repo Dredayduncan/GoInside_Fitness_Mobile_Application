@@ -7,7 +7,7 @@ import 'package:go_inside_fitness/views/premium.dart';
 class TypesOfPackages extends StatelessWidget {
   final Auth auth;
 
-  TypesOfPackages({Key? key, required this.auth}) : super(key: key);
+  const TypesOfPackages({Key? key, required this.auth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
