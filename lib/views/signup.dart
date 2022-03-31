@@ -15,7 +15,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  late String _name, _phone;
+  late String _name, _phone, dropdownValue;
 
   final emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
@@ -145,38 +145,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                     ),
-                  ),
                   SizedBox(height: 40.0),
-                  CustomElevatedButton(
-                      text: 'Create My Account',
-                      onPressed: () {
-                        if(_formkey.currentState!.validate()) {
-                          auth.createUserWithEmailAndPassword(emailController.text, _password.text).
-
-                          then((value) {
-                            Navigator.pushReplacement(
-                                context, MaterialPageRoute(
-                                builder: (context) => Login())
-                            );
-                          });
-                        }
-                      },
-                      color: Color(0xFFFCF4E1),
-                      textColor: Color(0xFF2B120D)
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context, MaterialPageRoute(
-                        builder: (context) => Login())
-                      );
-                    },
-                    child: Text(
-                        'Already have an account? Log In',
-                        style: TextStyle(
-                          color: Color(0xFFFCF4E1),
-                          fontWeight: FontWeight.bold
-                        )
                     const SizedBox(height: 15.0),
                     Container(
                       width: 300.0,
