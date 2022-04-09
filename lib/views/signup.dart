@@ -16,6 +16,15 @@ class _SignUpState extends State<SignUp> {
 
   late String _name, _phone;
 
+  String gender = "Male";
+
+  // List of items in our dropdown menu
+  final List<String> genders = [
+    'Male',
+    'Female',
+  ];
+
+
   final emailController = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _confirmpassword = TextEditingController();
@@ -177,6 +186,65 @@ class _SignUpState extends State<SignUp> {
                           },
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 15.0,),
+                    Container(
+                      width: 300.0,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[500]?.withOpacity(0.5),
+                          borderRadius: const BorderRadius.all(Radius.circular(50.0))
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: DropdownButton(
+                          isExpanded: true,
+
+                          style: const TextStyle(
+                              color: Color(0xFF2B120D)
+                          ),
+
+                          // Initial Value
+                          value: gender,
+
+                          // Down Arrow Icon
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Color(0xFFFCF4E1),
+                          ),
+
+                          // Array list of items
+                          items: genders.map((String item) {
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  color: Color(0xFF2B120D),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+
+                          selectedItemBuilder: (BuildContext context) {
+                            return genders.map((String value) {
+                              return Text(
+                                gender,
+                                style: const TextStyle(
+                                  color: Color(0xFFFCF4E1),
+                                ),
+                              );
+                            }).toList();
+                          },
+
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              gender = newValue!;
+                            });
+                          },
+                        ),
+                      )
                     ),
                     const SizedBox(height: 15.0),
                     Container(

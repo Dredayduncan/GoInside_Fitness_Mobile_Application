@@ -6,14 +6,16 @@ class CustomTextField extends StatelessWidget {
   final double textFieldWidth;
   final String value;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
-  const CustomTextField({
+  CustomTextField({
     Key? key,
+    this.validator,
     required this.labeledText,
     required this.containerWidth,
     required this.textFieldWidth,
     required this.value,
-    required this.controller
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,8 @@ class CustomTextField extends StatelessWidget {
       child: Center(
           child: SizedBox(
             width: textFieldWidth,
-            child: TextField(
+            child: TextFormField(
+              validator: validator,
               controller: controller,
               style: const TextStyle(
                   color: Color(0xFFFCF4E1)

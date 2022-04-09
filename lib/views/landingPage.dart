@@ -33,11 +33,17 @@ class LandingPage extends StatelessWidget {
 
               if (value == true) {
                 //Display the homepage when the user signed in
-
-                return ScreenManager(auth: auth,);
+                return Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScreenManager(auth: auth))
+                );
+                // return ScreenManager(auth: auth,);
               }
 
-              return TypesOfPackages(auth: auth);
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TypesOfPackages(auth: auth))
+              );
             });
 
 
@@ -52,10 +58,5 @@ class LandingPage extends StatelessWidget {
         }
     );
   }
-
-  Future<bool> clientChecker({userID}) async {
-    return await db.isUserClient(userID: userID.uid);
-  }
-
 
 }

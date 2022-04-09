@@ -34,6 +34,12 @@ class _ProfileState extends State<Profile> {
   //Create database variable
   final RTDatabase db = RTDatabase();
 
+  // instantiate image picker option
+  final ImagePicker _picker = ImagePicker();
+
+  //Instantiate form key
+  final _formKey = GlobalKey<FormState>();
+
   // Create text controllers for the various fields
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
@@ -79,18 +85,17 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
-  // instantiate image picker option
-  final ImagePicker _picker = ImagePicker();
+
 
   //diplay profile picture
   String _dp = "images/profile.jpeg";
 
   Future getImage() async {
-    final File pickedImage = (await _picker.pickImage(source: ImageSource.gallery)) as File;
+    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
 
 
-    File tmpFile = File(pickedImage.path);
-    tmpFile = await tmpFile.copy("images/$tmpFile.path");
+    File tmpFile = File(pickedImage!.path);
+    tmpFile = await tmpFile.copy("images/profile.jpeg");
     print("This is the path, ${tmpFile.path}");
 
     setState(() {
@@ -108,260 +113,311 @@ class _ProfileState extends State<Profile> {
   Widget _buildProfile(){
     return Scaffold(
       backgroundColor: const Color(0xFF2B120D),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Color(0xFF5A5A5A)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Stack(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: AssetImage(_dp),
-                            minRadius: 50.0,
-                          ),
-                          Positioned(
-                              bottom: 5,
-                              right: 0,
-                              child: Container(
-                                height: 35.0,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xFFFCF4E1),
-                                ),
-                                child: IconButton(
-                                    iconSize: 20.0,
-                                    onPressed: () {
-                                      getImage();
-
-                                    },
-                                    icon: const Icon(Icons.camera_alt_rounded)),
-                              )
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      color: Color(0xFF5A5A5A)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        Stack(
                           children: [
-                            Text(
-                              _userName,
-                              style: const TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFFCF4E1)
-                              ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage(_dp),
+                              minRadius: 50.0,
                             ),
-                            Text(_userEmail,
-                                style: const TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontSize: 14,
-                                    color: Color(0xFFFCF4E1)
+                            Positioned(
+                                bottom: 5,
+                                right: 0,
+                                child: Container(
+                                  height: 35.0,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xFFFCF4E1),
+                                  ),
+                                  child: IconButton(
+                                      iconSize: 20.0,
+                                      onPressed: () {
+                                        getImage();
+
+                                      },
+                                      icon: const Icon(Icons.camera_alt_rounded)),
                                 )
                             )
                           ],
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _userName,
+                                style: const TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFFCF4E1)
+                                ),
+                              ),
+                              Text(_userEmail,
+                                  style: const TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 14,
+                                      color: Color(0xFFFCF4E1)
+                                  )
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            CustomTextField(
+              CustomTextField(
+                validator: (_name) {
+                  if (_name!.isEmpty){
+                    return "Please enter your name";
+                  }
+
+                  return null;
+                },
                 controller: _name,
                 value: "",
                 labeledText: "Your Name",
                 containerWidth: 360.0,
                 textFieldWidth: 300.0
-            ),
-
-            const SizedBox(height: 10.0,),
-
-            CustomTextField(
-                controller: _email,
-                value: "",
-                labeledText: "Your Email",
-                containerWidth: 360.0,
-                textFieldWidth: 300.0
-            ),
-
-            const SizedBox(height: 10.0,),
-
-            CustomTextField(
-                controller: _contact,
-                value: "",
-                labeledText: "Contact",
-                containerWidth: 360.0,
-                textFieldWidth: 300.0
-            ),
-
-            const SizedBox(height: 10.0,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomTextField(
-                    controller: _height,
-                    value: "",
-                    labeledText: "Height",
-                    containerWidth: 150.0,
-                    textFieldWidth: 100.0
-                ),
-
-                const SizedBox(width: 10.0,),
-
-                CustomTextField(
-                    controller: _weight,
-                    value: "",
-                    labeledText: "Weight",
-                    containerWidth: 150.0,
-                    textFieldWidth: 100.0
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 10.0,),
-
-            const CustomPackageIndicator(
-                package: "GO INSIDE PACKAGE",
-                value: "LITE"
-            ),
-
-            const SizedBox(height: 10.0,),
-
-            Container(
-              height: 60,
-              width: 360,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  color: Color(0xFF5A5A5A)
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 25.0, top: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "GOAL",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w300
+
+              const SizedBox(height: 10.0,),
+
+              CustomTextField(
+                  validator: (_email) {
+                    if (_email!.isEmpty){
+                      return "Please enter your email";
+                    }
+
+                    return null;
+                  },
+                  controller: _email,
+                  value: "",
+                  labeledText: "Your Email",
+                  containerWidth: 360.0,
+                  textFieldWidth: 300.0
+              ),
+
+              const SizedBox(height: 10.0,),
+
+              CustomTextField(
+                  validator: (_contact) {
+                    if (_contact!.isEmpty){
+                      return "Please enter your contact";
+                    }
+
+                    return null;
+                  },
+                  controller: _contact,
+                  value: "",
+                  labeledText: "Contact",
+                  containerWidth: 360.0,
+                  textFieldWidth: 300.0
+              ),
+
+              const SizedBox(height: 10.0,),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomTextField(
+                      validator: (_height) {
+                        if (_height!.isEmpty){
+                          return "Please fill";
+                        }
+
+                        return null;
+                      },
+                      controller: _height,
+                      value: "",
+                      labeledText: "Height",
+                      containerWidth: 150.0,
+                      textFieldWidth: 100.0
+                  ),
+
+                  const SizedBox(width: 10.0,),
+
+                  CustomTextField(
+                      validator: (_weight) {
+                        if (_weight!.isEmpty){
+                          return "Please fill";
+                        }
+
+                        return null;
+                      },
+                      controller: _weight,
+                      value: "",
+                      labeledText: "Weight",
+                      containerWidth: 150.0,
+                      textFieldWidth: 100.0
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 10.0,),
+
+              const CustomPackageIndicator(
+                  package: "GO INSIDE PACKAGE",
+                  value: "LITE"
+              ),
+
+              const SizedBox(height: 10.0,),
+
+              Container(
+                height: 60,
+                width: 360,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    color: Color(0xFF5A5A5A)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25.0, top: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "GOAL",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w300
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                      width: 300,
-                      child: DropdownButton(
-                        isExpanded: true,
+                      SizedBox(
+                        height: 32,
+                        width: 300,
+                        child: DropdownButton(
+                          isExpanded: true,
 
-                        style: const TextStyle(
-                            color: Color(0xFF2B120D)
-                        ),
+                          style: const TextStyle(
+                              color: Color(0xFF2B120D)
+                          ),
 
-                        // Initial Value
-                        value: _dropdownValue,
+                          // Initial Value
+                          value: _dropdownValue,
 
-                        // Down Arrow Icon
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Color(0xFFFCF4E1),
-                        ),
+                          // Down Arrow Icon
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Color(0xFFFCF4E1),
+                          ),
 
-                        // Array list of items
-                        items: goals.map((String item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                color: Color(0xFF2B120D),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-
-                        selectedItemBuilder: (BuildContext context) {
-                          return goals.map((String value) {
-                            return Text(
-                              _dropdownValue,
-                              style: const TextStyle(
-                                color: Color(0xFFFCF4E1),
+                          // Array list of items
+                          items: goals.map((String item) {
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  color: Color(0xFF2B120D),
+                                ),
                               ),
                             );
-                          }).toList();
-                        },
+                          }).toList(),
 
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _dropdownValue = newValue!;
-                          });
-                        },
+                          selectedItemBuilder: (BuildContext context) {
+                            return goals.map((String value) {
+                              return Text(
+                                _dropdownValue,
+                                style: const TextStyle(
+                                  color: Color(0xFFFCF4E1),
+                                ),
+                              );
+                            }).toList();
+                          },
+
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _dropdownValue = newValue!;
+                            });
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
 
 
-            const SizedBox(height: 10.0,),
-            CustomElevatedButton(
-              text: "Save Profile",
-              onPressed: () {
+              const SizedBox(height: 10.0,),
+              CustomElevatedButton(
+                text: "Save Profile",
+                onPressed: () {
 
-                try{
-                  RTDatabase().userProfileUpdate(
-                      userID: widget.auth.currentUser?.uid,
-                      email: _email.text,
-                      fullName: _name.text,
-                      contact: _contact.text,
-                      goal: _dropdownValue,
-                      height: _height.text,
-                      weight: _weight.text,
-                      picture: ""
-                  );
+                  if (!_formKey.currentState!.validate()){
+                    return StatusAlert.show(
+                      context,
+                      backgroundColor: const Color(0xFFFCF4E1),
+                      duration: const Duration(seconds: 1),
+                      title: 'Error',
+                      subtitle: 'Your profile could not be updated.',
+                      configuration: const IconConfiguration(icon: Icons.error_outline),
+                    );
+                  }
+                  else{
 
-                  setState(() {
-                    _populateFields();
-                  });
+                    try{
+                      RTDatabase().userProfileUpdate(
+                          userID: widget.auth.currentUser?.uid,
+                          email: _email.text,
+                          fullName: _name.text,
+                          contact: _contact.text,
+                          goal: _dropdownValue,
+                          height: _height.text,
+                          weight: _weight.text,
+                          picture: ""
+                      );
 
-                  return StatusAlert.show(
-                    context,
-                    backgroundColor: const Color(0xFFFCF4E1),
-                    duration: const Duration(seconds: 2),
-                    title: 'Success',
-                    subtitle: 'Your profile has been successfully updated.',
-                    configuration: const IconConfiguration(icon: Icons.done),
-                  );
-                } catch (e){
-                  return StatusAlert.show(
-                    context,
-                    backgroundColor: const Color(0xFFFCF4E1),
-                    duration: const Duration(seconds: 2),
-                    title: 'Error',
-                    subtitle: 'Your profile could not be updated.',
-                    configuration: const IconConfiguration(icon: Icons.error_outline),
-                  );
-                }
+                      setState(() {
+                        navigationPage();
+                      });
 
-              },
-              color: const Color(0xFFFCF4E1),
-              textColor: const Color(0xFF2B120D),
-            ),
-          ],
+                      return StatusAlert.show(
+                        context,
+                        backgroundColor: const Color(0xFFFCF4E1),
+                        duration: const Duration(seconds: 2),
+                        title: 'Success',
+                        subtitle: 'Your profile has been successfully updated.',
+                        configuration: const IconConfiguration(icon: Icons.done),
+                      );
+                    } catch (e){
+                      return StatusAlert.show(
+                        context,
+                        backgroundColor: const Color(0xFFFCF4E1),
+                        duration: const Duration(seconds: 2),
+                        title: 'Error',
+                        subtitle: 'Your profile could not be updated.',
+                        configuration: const IconConfiguration(icon: Icons.error_outline),
+                      );
+                    }
+                  }
+
+                },
+                color: const Color(0xFFFCF4E1),
+                textColor: const Color(0xFF2B120D),
+              ),
+            ],
+          ),
         ),
       ),
     );
