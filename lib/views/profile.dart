@@ -52,6 +52,9 @@ class _ProfileState extends State<Profile> {
   late String _userName;
   late String _userEmail;
 
+  //diplay profile picture
+  var _dp;
+
   Future<bool> _populateFields() async {
     await db.getUser(userID: widget.auth.currentUser?.uid).then((value) {
       setState(() {
@@ -63,6 +66,7 @@ class _ProfileState extends State<Profile> {
         _height.text = value['height'];
         _weight.text = value['weight'];
         _dropdownValue = value['goal'] != "" ? value['goal'] : "None";
+        _dp = value['picture'] != "" ? File(value['picture']) : null;
       });
 
       return true;
@@ -86,30 +90,14 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
-  //diplay profile picture
-  File? _dp = null;
-
+  // Retrieve image from gallery
   Future getImage() async {
     XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedImage != null){
-
-      setState(() {
-        File file = File(pickedImage.path);
-        _dp = file;
-      });
-
-
-    }
-
-
-    // // getting a directory path for saving
-    // final Directory path = await getApplicationDocumentsDirectory();
-    //
-    // // copy the file to a new path
-    // final File newImage = await file.copy('${path.path}/image1.png');
-
-
+    setState(() {
+      File file = File(pickedImage!.path);
+      _dp = file;
+    });
   }
 
   @override
@@ -144,7 +132,7 @@ class _ProfileState extends State<Profile> {
                               backgroundImage: _dp != null ? Image.file(
                                 _dp!,
                                 fit: BoxFit.cover,
-                              ) as ImageProvider : const AssetImage("images/profile.jpeg") as ImageProvider,
+                              ).image: AssetImage("images/profile.jpeg") as ImageProvider,
                               minRadius: 50.0,
                             ),
                             Positioned(
@@ -159,7 +147,11 @@ class _ProfileState extends State<Profile> {
                                   child: IconButton(
                                       iconSize: 20.0,
                                       onPressed: () {
-                                        getImage();
+                                        getImage().then((value) => {
+                                          setState(() {
+                                            _currentPage = _buildProfile();
+                                          })
+                                        });
 
                                       },
                                       icon: const Icon(Icons.camera_alt_rounded)),
@@ -169,6 +161,7 @@ class _ProfileState extends State<Profile> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(6.0),
+
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -397,11 +390,11 @@ class _ProfileState extends State<Profile> {
                           goal: _dropdownValue,
                           height: _height.text,
                           weight: _weight.text,
-                          picture: ""
+                          picture: _dp.path
                       );
 
                       setState(() {
-                        navigationPage();
+                        _currentPage = _buildProfile();
                       });
 
                       return StatusAlert.show(

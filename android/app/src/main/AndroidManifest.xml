@@ -2,6 +2,7 @@
     package="com.example.go_inside_fitness">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
+        android:requestLegacyExternalStorage="true"
         android:label="go_inside_fitness"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_inside_fitness/common_widgets/videoItems.dart';
 import 'package:go_inside_fitness/common_widgets/workoutItem.dart';
 import 'package:go_inside_fitness/services/rt_database.dart';
@@ -124,6 +125,17 @@ class WorkoutsAndTutorials {
             );
           }
 
+        }
+
+        if (children.isEmpty){
+          return const Center(
+            child: Text(
+              "There are no tutorials for today.",
+              style: TextStyle(
+                  color: Color(0xFFFCF4E1)
+              ),
+            ),
+          );
         }
 
         return Scrollbar(

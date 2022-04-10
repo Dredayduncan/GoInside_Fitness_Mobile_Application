@@ -195,12 +195,13 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: const BorderRadius.all(Radius.circular(50.0))
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: DropdownButton(
                           isExpanded: true,
-
+                          alignment: AlignmentDirectional.center,
                           style: const TextStyle(
-                              color: Color(0xFF2B120D)
+                            fontSize: 18,
+                            color: Color(0xFF2B120D)
                           ),
 
                           // Initial Value
@@ -320,7 +321,7 @@ class _SignUpState extends State<SignUp> {
                               email: emailController.text,
                               password: _password.text,
                               name: _nameController.text,
-                              gender: "",
+                              gender: gender,
                               contact: _phoneController.text,
                             ).
                             then((value) {
