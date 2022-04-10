@@ -8,10 +8,10 @@ import 'package:go_inside_fitness/views/welcome_screen.dart';
 import '../services/auth.dart';
 
 class LandingPage extends StatelessWidget {
-  final Auth auth;
+  final Auth auth = Auth();
   final RTDatabase db = RTDatabase();
 
-  LandingPage({Key? key, required this.auth}) : super(key: key);
+  LandingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

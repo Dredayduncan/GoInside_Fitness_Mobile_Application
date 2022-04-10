@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:go_inside_fitness/services/auth.dart';
 import 'package:go_inside_fitness/views/landingPage.dart';
 import 'firebase_options.dart';
 
@@ -10,7 +9,6 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Auth auth = Auth();
-  runApp(MaterialApp(home: LandingPage(auth: auth,)));
+  runApp(MaterialApp(home: LandingPage()));
 }
 

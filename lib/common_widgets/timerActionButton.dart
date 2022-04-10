@@ -15,10 +15,10 @@ class TimerActionButton extends StatelessWidget {
       ),
       child: CircleAvatar(
         backgroundColor: const Color(0xFFFCF4E1),
-        radius: 35,
+        radius: 25,
         child: Icon(
           icon,
-          size: 50,
+          size: 30,
           color: const Color(0xFF2B120D),
         ),
       ),

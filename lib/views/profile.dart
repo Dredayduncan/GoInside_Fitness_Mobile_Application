@@ -4,6 +4,7 @@ import 'package:go_inside_fitness/common_widgets/customElevatedButton.dart';
 import 'package:go_inside_fitness/common_widgets/customPackageIndicator.dart';
 import 'package:go_inside_fitness/common_widgets/customTextField.dart';
 import 'package:go_inside_fitness/services/rt_database.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:status_alert/status_alert.dart';
 import '../services/auth.dart';
 import 'package:image_picker/image_picker.dart';
@@ -85,22 +86,30 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
-
-
   //diplay profile picture
-  String _dp = "images/profile.jpeg";
+  File? _dp = null;
 
   Future getImage() async {
-    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null){
+
+      setState(() {
+        File file = File(pickedImage.path);
+        _dp = file;
+      });
 
 
-    File tmpFile = File(pickedImage!.path);
-    tmpFile = await tmpFile.copy("images/profile.jpeg");
-    print("This is the path, ${tmpFile.path}");
+    }
 
-    setState(() {
-      _dp = tmpFile.path;
-    });
+
+    // // getting a directory path for saving
+    // final Directory path = await getApplicationDocumentsDirectory();
+    //
+    // // copy the file to a new path
+    // final File newImage = await file.copy('${path.path}/image1.png');
+
+
   }
 
   @override
@@ -132,7 +141,10 @@ class _ProfileState extends State<Profile> {
                         Stack(
                           children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage(_dp),
+                              backgroundImage: _dp != null ? Image.file(
+                                _dp!,
+                                fit: BoxFit.cover,
+                              ) as ImageProvider : const AssetImage("images/profile.jpeg") as ImageProvider,
                               minRadius: 50.0,
                             ),
                             Positioned(

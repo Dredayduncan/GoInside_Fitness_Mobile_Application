@@ -20,7 +20,7 @@ class MealItem extends StatelessWidget {
             ),
             height: 100,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(2.0),
               child: Row(
                 children: [
                   const Icon(
@@ -28,31 +28,28 @@ class MealItem extends StatelessWidget {
                     size: 30,
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          label,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        label,
+                        style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.w400
+                        ),
+                      ),
+                      SizedBox(
+                        width: 250,
+                        child: Text(
+                          body,
                           style: const TextStyle(
                               fontFamily: "Montserrat",
-                              fontWeight: FontWeight.w400
+                              fontWeight: FontWeight.w600
                           ),
                         ),
-                        SizedBox(
-                          width: 250,
-                          child: Text(
-                            body,
-                            style: const TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.w600
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   )
                 ],
               ),

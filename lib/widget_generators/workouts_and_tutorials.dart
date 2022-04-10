@@ -92,25 +92,47 @@ class WorkoutsAndTutorials {
     });
   }
 
-  Widget viewTutorials(){
-    return Scrollbar(
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        children: const [
-          VideoItem(
-              link: "https://www.youtube.com/watch?v=sSIccj82Dyg&list=PLCRdosAfKRzD7lmesClKc_OIgF2n3OFt9&index=1",
-              workoutName: "Push Ups"),
-          VideoItem(
-              link: "https://www.youtube.com/watch?v=sSIccj82Dyg&list=PLCRdosAfKRzD7lmesClKc_OIgF2n3OFt9&index=1",
-              workoutName: "Push Ups"),
-          VideoItem(
-              link: "https://www.youtube.com/watch?v=sSIccj82Dyg&list=PLCRdosAfKRzD7lmesClKc_OIgF2n3OFt9&index=1",
-              workoutName: "Push Ups"),
-          VideoItem(
-              link: "https://www.youtube.com/watch?v=sSIccj82Dyg&list=PLCRdosAfKRzD7lmesClKc_OIgF2n3OFt9&index=1",
-              workoutName: "Push Ups"),
-        ],
-      ),
-    );
+  Future<Widget> viewTutorials() async {
+    return await db.getWorkouts(
+        day: days[theDate],
+        goal: goal
+    ).then((value) {
+      if (value.isEmpty){
+        return const Center(
+          child: Text(
+            "There are no tutorials for today.",
+            style: TextStyle(
+                color: Color(0xFFFCF4E1)
+            ),
+          ),
+        );
+      }
+      else{
+        // Get the workouts for that day
+        List dailyWorkouts = value['workouts'];
+
+        //Initialize the list of tutorials
+        final children = <Widget>[];
+
+        for (var i = 0; i < dailyWorkouts.length; i++) {
+          if (dailyWorkouts[i]['link'] != ""){
+            children.add(
+                VideoItem(
+                  workoutName: dailyWorkouts[i]['name'],
+                  link: dailyWorkouts[i]['link'],
+                )
+            );
+          }
+
+        }
+
+        return Scrollbar(
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: children,
+            )
+        );
+      }
+    });
   }
 }

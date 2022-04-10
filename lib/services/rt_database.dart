@@ -118,7 +118,6 @@ class RTDatabase {
   }
 
   // Get the meals for a particular day
-  // Get the workouts for a particular day
   Future<Map> getMeals({day}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("Meals/$day");
 

@@ -68,7 +68,39 @@ class Workouts extends StatelessWidget {
                 }
               }
             ),
-            tabViewer.viewTutorials()
+            FutureBuilder(
+                future: tabViewer.viewTutorials(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData){
+                    return snapshot.data;
+                  }
+                  else {
+                    return
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          SizedBox(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFFFCF4E1),
+                            ),
+                            width: 60,
+                            height: 60,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 16),
+                            child: Text(
+                              'Awaiting result...',
+                              style: TextStyle(
+                                  color: Color(0xFFFCF4E1)
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                  }
+                }
+            ),
           ],
         ),
       ),

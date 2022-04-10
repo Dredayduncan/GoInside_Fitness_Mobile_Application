@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:go_inside_fitness/common_widgets/musicItem.dart';
 import 'package:go_inside_fitness/common_widgets/timerActionButton.dart';
+import 'package:go_inside_fitness/views/landingPage.dart';
 
 class WorkoutTracker extends StatefulWidget {
   const WorkoutTracker({Key? key}) : super(key: key);
@@ -11,7 +14,25 @@ class WorkoutTracker extends StatefulWidget {
 
 class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStateMixin{
 
+  List<Widget> spotifyPlaylists = [
+    const MusicItem(
+        label: "Go Inside Afrobeat 1",
+        link: "https://open.spotify.com/playlist/6GsEs5D9VGVCaThoyLL7vS?si=b2bc5ee6ec594f60"
+    ),
+    const MusicItem(
+        label: "Go Inside Fitness Rap 1",
+        link: "https://open.spotify.com/playlist/6TpNxHPcnOudItQZDcHw6X?si=e65e009ce8474025"
+    ),
+    const MusicItem(
+        label: "Go Inside Afrobeat 2",
+        link: "https://open.spotify.com/playlist/14a10G2Psq0oeKPWOtaph?si=U58sXi7HQJ-tcpRcIbGgXQ"
+    ),
+  ];
+
   late AnimationController controller;
+
+  // Instantiate the notification object
+  late FlutterLocalNotificationsPlugin _notifications;
 
   bool isPlaying = false;
 
@@ -26,8 +47,10 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
 
   void notify() {
     if (countText == '0:00:00') {
-      // FlutterRingtonePlayer.playNotification();
-      print("Ended");
+      _showNotification(
+          title: "Time's Up",
+          body: "You have successfully completed your workout"
+      );
     }
   }
 
@@ -52,6 +75,27 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
         });
       }
     });
+
+    // set up notifications
+    _notifications = FlutterLocalNotificationsPlugin();
+
+    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iOS = IOSInitializationSettings();
+
+    const settings = InitializationSettings(
+        android: android,
+        iOS: iOS
+    );
+
+    _notifications.initialize(
+        settings,
+        onSelectNotification: (payload) async {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LandingPage())
+          );
+        }
+    );
   }
 
   @override
@@ -67,7 +111,7 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
       body: Center(
         child: Column(
             children: [
-              const SizedBox(height: 15.0,),
+              const SizedBox(height: 5.0,),
               const SizedBox(
                 width: 300,
                 child: Text(
@@ -81,9 +125,38 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
                   textAlign: TextAlign.center,
                 ),
               ),
+              const SizedBox(height: 10.0,),
               _buildTimer(),
-              const SizedBox(height: 15.0,),
+              const SizedBox(height: 10.0,),
               _buildButtons(),
+              const SizedBox(height: 10.0,),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(width: 2.0, color: Color(0xFFFCF4E1))
+                      )
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Playlists",
+                      style: TextStyle(
+                          color: Color(0xFFFCF4E1),
+                          fontSize: 22.0,
+                          fontFamily: "Quicksand"
+                      ),
+                    ),
+                  )
+              ),
+              const SizedBox(height: 2.0,),
+              Expanded(
+                  child: Scrollbar(
+                    child:  ListView(
+                  scrollDirection: Axis.vertical,
+                    children: spotifyPlaylists,
+                  )
+                )
+              ),
             ]
         ),
       ),
@@ -180,6 +253,32 @@ class _WorkoutTrackerState extends State<WorkoutTracker> with TickerProviderStat
       ),
     );
  }
+
+  // The function responsible for sending push notifications
+  Future _showNotification({
+    int id = 0,
+    String? title,
+    String? body,
+  }) async => _notifications.show(
+    id,
+    title,
+    body,
+    await _notificationDetails(), //Await because this is an async function
+  );
+
+  Future _notificationDetails() async {
+    return const NotificationDetails(
+      android: AndroidNotificationDetails(
+        'channelId',
+        'Local Notification',
+        channelDescription: "Channel Description",
+        importance: Importance.high,
+      ),
+      iOS: IOSNotificationDetails(),
+    );
+  }
 }
+
+
 
 
