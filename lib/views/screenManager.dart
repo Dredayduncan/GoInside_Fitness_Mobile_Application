@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_inside_fitness/views/phoneCall.dart';
 import '../services/auth.dart';
 import 'login.dart';
 import 'profile.dart';
@@ -45,6 +46,9 @@ class _ScreenManagerState extends State<ScreenManager> {
       case 2:
         _setTitleInfo("My Profile", const Icon(Icons.person));
         return Profile(auth: widget.auth,); // return the workout tracker page as a widget
+      case 3:
+        _setTitleInfo("Call Instructors", const Icon(Icons.call_end));
+        return const PhoneCall(); // return the workout tracker page as a widget
     }
 
     _setTitleInfo("Page Not Found", const Icon(Icons.cancel));
@@ -120,6 +124,10 @@ class _ScreenManagerState extends State<ScreenManager> {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person),
                   label: "Profile"
+                ),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.call),
+                    label: "Call Instructor"
                 ),
               ],
               currentIndex: _selectedIndex,

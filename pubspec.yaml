@@ -33,6 +33,7 @@ dependencies:
   firebase_core: ^1.13.1
   youtube_player_flutter: ^8.0.0
   status_alert: ^1.0.0
+  flutter_phone_direct_caller: ^2.1.1
 
   flutter:
     sdk: flutter
