@@ -8,7 +8,6 @@ class PhoneCall extends StatelessWidget {
 
   Future<bool?> _callNumber(String number) async{
     bool? res = await FlutterPhoneDirectCaller.callNumber(number);
-    print(res);
     return res;
   }
 
